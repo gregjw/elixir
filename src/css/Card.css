@@ -7,6 +7,7 @@
   border-radius: 5px;
   width: 100px;
   padding-bottom: 30px;
+  cursor: pointer;
 }
 
 .white-card {
@@ -18,6 +19,7 @@
   border-radius: 5px;
   width: 100px;
   padding-bottom: 30px;
+  cursor: pointer;
 }
 
 .unique {
@@ -25,7 +27,9 @@
   font-weight: 'bold';
   color: '#222';
   justify-content: 'space-around';
-  margin: 25px;
+  top: 5;
+  margin-top: 5px;
+  margin-bottom: 50px;
 }
 
 .attack {
@@ -34,7 +38,7 @@
   color: '#222';
   justify-content: 'space-around';
   margin: 5px;
-  background-color: red;
+  background-color: #E27171;
   padding: 10px;
   border-radius: 50%;
   text-align: left;
@@ -47,7 +51,7 @@
   color: '#222';
   justify-content: 'space-around';
   margin: 5px;
-  background-color: red;
+  background-color: #64d69f;
   padding: 10px;
   border-radius: 50%;
   text-align: right;

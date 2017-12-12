@@ -9,36 +9,74 @@ export default class Arena extends Component {
     super(props);
 
     this.state = {
-      bHealth : [],
-      wHealth : [],
+      currentTurn : "black",
+      bHealth : 500,
+      wHealth : 500,
       bCardsInHand : [],
       bCardsInPlay : [],
       wCardsInHand : [],
       wCardsInPlay : []
-    };
+    }
 
     this.generateHand = this.generateHand.bind(this);
+    this.moveToPlay = this.moveToPlay.bind(this);
   }
 
-  generateHand(){
+  componentDidMount(){
+    this.setState({
+      bCardsInHand : this.generateHand("black"),
+      wCardsInHand : this.generateHand("white")
+    });
+  }
+
+  generateHand(colour){
     var hand = [];
+
+    if(colour === "black"){
+      _.times(4, i =>
+        hand.push(<Card player="black" onClick={this.moveToPlay("black")}/>)
+      );
+    } else {
+      _.times(4, i =>
+        hand.push(<Card player="white" onClick={this.moveToPlay("white")}/>)
+      );
+    }
+
     return hand;
+  }
+
+
+  moveToPlay(colour){
+    if(colour === "black"){
+      this.setState({
+        bCardsInPlay : <Card player="black" />
+      });
+    } else {
+      this.setState({
+        wCardsInPlay : <Card player="white" />
+      });
+    }
   }
 
   render() {
     return (
       <div className="container center">
         <div className="white-container">
-          {_.times(2, i =>
-            <Card player="white" />
-          )}
+          {this.state.wCardsInHand}
+        </div>
+
+        <div className="white-container mid">
+          {this.state.wCardsInPlay}
         </div>
 
         <div className="black-container">
-          {_.times(4, i =>
-            <Card player="black" />
-          )}
+          {this.state.bCardsInHand}
         </div>
+
+        <div className="black-container mid">
+          {this.state.bCardsInPlay}
+        </div>
+        
       </div>
     );
   }
