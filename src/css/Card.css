@@ -1,6 +1,16 @@
-.card-container {
+.black-card {
   background-color: #222;
-  color: #fff;
+  color: #FFF;
+  margin: 15px;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100px;
+}
+
+.white-card {
+  background-color: #FFF;
+  color: #222;
   margin: 15px;
   margin-top: 5px;
   padding: 10px;

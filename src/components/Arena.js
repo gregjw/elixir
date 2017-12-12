@@ -27,9 +27,15 @@ export default class Arena extends Component {
   render() {
     return (
       <div className="container center">
-        <Card />
-        <Card />
-        <Card />
+        <div className="white-container">
+          <Card player="white"/>
+          <Card player="white"/>
+        </div>
+
+        <div className="black-container">
+          <Card player="black"/>
+          <Card player="black"/>
+        </div>
       </div>
     );
   }

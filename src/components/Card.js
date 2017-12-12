@@ -6,6 +6,7 @@ export default class Card extends Component {
     super(props);
 
     this.state = {
+      player : this.props.player,
       unique : "5234234",
       attack : 15,
       health : 20
@@ -39,7 +40,7 @@ export default class Card extends Component {
 
   render() {
     return (
-      <div className="card-container">
+      <div className={this.state.player + "-card"}>
         <div className="unique">{this.state.unique}</div>
         <div className="attack">{this.state.attack}</div>
         <div className="health">{this.state.health}</div>

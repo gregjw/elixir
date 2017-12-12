@@ -1,10 +1,31 @@
 .container {
   background-color: #CCC;
-  width: 90vw;
-  height: 85vh;
+  width: 92.5vw;
+  height: 90vh;
   padding: 10px;
-  margin-top: 5vh;
-  border-radius: 5px;
+  margin-top: 2.5vh;
+}
+
+.white-container{
+	background-color: #eee;
+	margin: 10px;
+	padding: 5px;
+	padding-top: 10px;
+	display: block;
+	float: left;
+	height: 90%;
+	border-radius: 5px;
+}
+
+.black-container{
+	background-color: #555;
+	margin: 10px;
+	padding: 5px;
+	padding-top: 10px;
+	display: block;
+	float: right;
+	height: 90%;
+	border-radius: 5px;
 }
 
 .center {
