@@ -1,0 +1,33 @@
+.card-container {
+  background-color: #222;
+  color: #fff;
+  margin: 15px;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100px;
+}
+
+.unique {
+  font-size: 10px;
+  font-weight: 'bold';
+  color: '#222';
+  justify-content: 'space-around';
+  margin: 12.5px;
+}
+
+.attack {
+  font-size: 20px;
+  font-weight: 'bold';
+  color: '#222';
+  justify-content: 'space-around';
+  margin: 12.5px;
+}
+
+.health {
+  font-size: 20px;
+  font-weight: 'bold';
+  color: '#222';
+  justify-content: 'space-around';
+  margin: 12.5px;
+}
