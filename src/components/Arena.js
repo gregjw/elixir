@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/Arena.css';
+import _ from 'lodash';
 
 import Card from './Card.js';
 
@@ -28,13 +29,15 @@ export default class Arena extends Component {
     return (
       <div className="container center">
         <div className="white-container">
-          <Card player="white"/>
-          <Card player="white"/>
+          {_.times(2, i =>
+            <Card player="white" />
+          )}
         </div>
 
         <div className="black-container">
-          <Card player="black"/>
-          <Card player="black"/>
+          {_.times(4, i =>
+            <Card player="black" />
+          )}
         </div>
       </div>
     );
