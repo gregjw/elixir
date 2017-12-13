@@ -1,34 +1,52 @@
 .container {
 	background-color: #CCC;
-	width: 95vw;
-	height: 92vh;
+	width: 100vw;
+	height: 100vh;
 	padding: 10px;
-	margin-top: 2.5vh;
 }
 
 .white-container{
 	background-color: #eee;
 	margin: 10px;
 	padding: 5px;
-	padding-top: 10px;
+	padding-top: 15px;
 	display: block;
 	float: left;
 	border-radius: 5px;
+	min-height: 85%;
 }
 
 .black-container{
 	background-color: #555;
 	margin: 10px;
 	padding: 5px;
-	padding-top: 10px;
+	padding-top: 15px;
 	display: block;
 	float: right;
 	border-radius: 5px;
+	min-height: 85%;
 }
 
-.mid {
+.white-play{
+	background-color: #eee;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 5px;
+	padding-top: 15px;
 	position: relative;
-	margin-top: 22.5vh;
+	display: block;
+	float: left;
+}
+
+.black-play{
+	background-color: #555;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 5px;
+	padding-top: 15px;
+	position: relative;
+	display: block;
+	float: right;
 }
 
 .center {

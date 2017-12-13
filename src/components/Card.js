@@ -6,6 +6,7 @@ export default class Card extends Component {
     super(props);
 
     this.state = {
+      unique : this.props.unique,
       player : this.props.player,
       attack : 15,
       health : 20
@@ -15,7 +16,7 @@ export default class Card extends Component {
   render() {
     return (
       <div onClick={this.props.moveToPlay} className={this.state.player + "-card"}>
-        <div className="unique">Card</div>
+        <div className="unique">{this.state.unique} {this.props.card}</div>
         <div className="center">
           <div className="attack">{this.state.attack}</div>
           <div className="health">{this.state.health}</div>

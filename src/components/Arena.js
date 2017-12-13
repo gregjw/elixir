@@ -52,13 +52,13 @@ export default class Arena extends Component {
     });
   }
 
-  moveToPlay(card){
+  moveToPlay(card, current){
     if(card === "black"){
       let bPlayInterim = this.state.bCardsInPlay;
-      bPlayInterim.push(<Card key={generateRandomID()} player="black" />);
-
       let bHandInterim = this.state.bCardsInHand;
-      bHandInterim.pop();
+
+      bPlayInterim.push(bHandInterim[current]);
+      bHandInterim.pop(bHandInterim[current]);
 
       this.setState({
         bCardsInPlay : bPlayInterim,
@@ -66,10 +66,10 @@ export default class Arena extends Component {
       });
     } else {
       let wPlayInterim = this.state.wCardsInPlay;
-      wPlayInterim.push(<Card key={generateRandomID()} player="white" />);
-
       let wHandInterim = this.state.wCardsInHand;
-      wHandInterim.pop();
+
+      wPlayInterim.push(wHandInterim[current]);
+      wHandInterim.pop(wHandInterim[current]);
 
       this.setState({
         wCardsInPlay : wPlayInterim,
@@ -77,7 +77,7 @@ export default class Arena extends Component {
       });
     }
 
-    console.log("Moved");
+    console.log("Moved " + current);
   }
 
   generateHand(colour){
@@ -87,13 +87,17 @@ export default class Arena extends Component {
       _.times(4, i =>
         hand.push(
           <Card key={generateRandomID()}
-          moveToPlay={() => this.moveToPlay("black")}
+          card = {i}
+          unique = {generateRandomID()}
+          moveToPlay={() => this.moveToPlay("black", i)}
           player="black" />)
       );
     } else {
       _.times(4, i =>
         hand.push(<Card key={generateRandomID()}
-          moveToPlay={() => this.moveToPlay("white")}
+          card = {i}
+          unique = {generateRandomID()}
+          moveToPlay={() => this.moveToPlay("white", i)}
           player="white" />)
       );
     }
@@ -108,7 +112,7 @@ export default class Arena extends Component {
           {this.state.wCardsInHand}
         </div>
 
-        <div className="white-container mid">
+        <div className="white-play">
           {this.state.wCardsInPlay}
         </div>
 
@@ -116,7 +120,7 @@ export default class Arena extends Component {
           {this.state.bCardsInHand}
         </div>
 
-        <div className="black-container mid">
+        <div className="black-play">
           {this.state.bCardsInPlay}
         </div>
       </div>
