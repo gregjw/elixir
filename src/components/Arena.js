@@ -58,7 +58,7 @@ export default class Arena extends Component {
       let bHandInterim = this.state.bCardsInHand;
 
       bPlayInterim.push(bHandInterim[current]);
-      bHandInterim.pop(bHandInterim[current]);
+      bHandInterim.splice(current, 1);
 
       this.setState({
         bCardsInPlay : bPlayInterim,
@@ -69,7 +69,7 @@ export default class Arena extends Component {
       let wHandInterim = this.state.wCardsInHand;
 
       wPlayInterim.push(wHandInterim[current]);
-      wHandInterim.pop(wHandInterim[current]);
+      wHandInterim.splice(current, 1);
 
       this.setState({
         wCardsInPlay : wPlayInterim,
@@ -108,7 +108,9 @@ export default class Arena extends Component {
   render() {
     return (
       <div className="container center">
-        <div className="white-container">
+        <div className="title center">Duel</div>
+
+        <div className="white-hand">
           {this.state.wCardsInHand}
         </div>
 
@@ -116,7 +118,7 @@ export default class Arena extends Component {
           {this.state.wCardsInPlay}
         </div>
 
-        <div className="black-container">
+        <div className="black-hand">
           {this.state.bCardsInHand}
         </div>
 
