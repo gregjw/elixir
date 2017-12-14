@@ -3,6 +3,7 @@ import '../css/Arena.css';
 import _ from 'lodash';
 
 import Card from './Card.js';
+import logo from '../assets/d20.png';
 
 function generateRandomID(){
   var dictionary =
@@ -32,6 +33,8 @@ export default class Arena extends Component {
     super(props);
 
     this.state = {
+      primaryFocus : [],
+      secondaryFocus : [],
       currentTurn : "black",
       bHealth : 500,
       wHealth : 500,
@@ -108,7 +111,7 @@ export default class Arena extends Component {
   render() {
     return (
       <div className="container center">
-        <div className="title center">Duel</div>
+        <img alt="Duel" className="logo" src={logo}/>
 
         <div className="white-hand">
           {this.state.wCardsInHand}
@@ -117,6 +120,7 @@ export default class Arena extends Component {
         <div className="white-play">
           {this.state.wCardsInPlay}
         </div>
+
 
         <div className="black-hand">
           {this.state.bCardsInHand}

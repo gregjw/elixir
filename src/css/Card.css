@@ -3,11 +3,18 @@
   color: #FFF;
   margin: 15px;
   margin-top: 5px;
-  padding: 10px;
   border-radius: 5px;
+  padding: 10px;
   width: 100px;
   padding-bottom: 30px;
   cursor: pointer;
+  border: 5px solid #333;
+  transition: .3s;
+}
+
+.black-card:hover{
+  border: 5px solid #fc4e59;
+  transition: .3s;
 }
 
 .white-card {
@@ -15,11 +22,18 @@
   color: #222;
   margin: 15px;
   margin-top: 5px;
-  padding: 10px;
   border-radius: 5px;
+  padding: 10px;
   width: 100px;
   padding-bottom: 30px;
   cursor: pointer;
+  border: 5px solid #FAFAFA;
+  transition: .3s;
+}
+
+.white-card:hover{
+  border: 5px solid #fc4e59;
+  transition: .3s;
 }
 
 .unique {
@@ -35,6 +49,7 @@
 .attack {
   font-size: 15px;
   font-weight: 'bold';
+  font-family: 'Inter UI', sans-serif;
   color: '#222';
   justify-content: 'space-around';
   margin: 5px;
@@ -43,11 +58,14 @@
   border-radius: 50%;
   text-align: left;
   display: inline;
+  height: 25px;
+  width: 25px;
 }
 
 .health {
   font-size: 15px;
   font-weight: 'bold';
+  font-family: 'Inter UI', sans-serif;
   color: '#222';
   justify-content: 'space-around';
   margin: 5px;
@@ -56,4 +74,6 @@
   border-radius: 50%;
   text-align: right;
   display: inline;
+  height: 25px;
+  width: 25px;
 }

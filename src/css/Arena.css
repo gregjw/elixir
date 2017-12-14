@@ -49,14 +49,12 @@ body {
 	float: right;
 }
 
-.title{
-	color: #FFF;
-	text-align: center;
-	padding: 5px 50px;
-	font-size: 30px;
-	padding-bottom: 15px;
-	font-family: 'Inter UI', sans-serif;
+.logo{
+	width: 80px;
 	position: relative;
+	animation: logo-spin infinite 20s linear;
+	padding: 5px 50px;
+	padding-bottom: 15px;
 }
 
 .center {
