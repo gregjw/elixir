@@ -23,6 +23,9 @@ export default class Card extends Component {
         <div className="center">
           <div className="attack">{this.state.attack}</div>
           <div className="health">{this.state.health}</div>
+          <br/><br/><br/>
+          <div className="attack">{this.state.attack}</div>
+          <div className="health">{this.state.health}</div>
         </div>
       </div>
     );

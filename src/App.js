@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Arena from './components/Arena.js';
+import Engine from './components/Engine.js';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Arena />
+        <Engine />
       </div>
     );
   }
