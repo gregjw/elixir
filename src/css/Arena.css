@@ -5,6 +5,16 @@ body {
 	border-radius: 5px;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 .white-hand{
 	background-color: #eee;
 	margin: 10px;
@@ -25,6 +35,10 @@ body {
 	float: right;
 	border-radius: 5px;
 	min-height: 85%;
+}
+
+.healthbar{
+	margin-bottom: 25px;
 }
 
 .white-play{
@@ -50,11 +64,13 @@ body {
 }
 
 .logo{
-	width: 80px;
+	width: 50px;
 	position: relative;
 	animation: logo-spin infinite 10s linear;
 	padding: 5px 50px;
 	padding-bottom: 15px;
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 
 .center {

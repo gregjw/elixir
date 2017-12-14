@@ -54,6 +54,7 @@ export default class Arena extends Component {
 
     this.generateHand = this.generateHand.bind(this);
     this.moveToPlay = this.moveToPlay.bind(this);
+    this.attackOpponent = this.attackOpponent.bind(this);
   }
 
   componentDidMount(){
@@ -61,6 +62,24 @@ export default class Arena extends Component {
       bCardsInHand : this.generateHand("black"),
       wCardsInHand : this.generateHand("white")
     });
+  }
+
+  attackOpponent(card, attack){
+    if(card === "white"){
+      let new_value = this.state.wHealth - attack;
+      this.setState({
+        wHealth : new_value
+      });
+      console.log("Attacked");
+    } else {
+      let new_value = this.state.bHealth - attack;
+      this.setState({
+        bHealth : new_value
+      });
+      console.log("Attacked");
+    }
+
+    return false;
   }
 
   moveToPlay(card, current){
@@ -106,29 +125,37 @@ export default class Arena extends Component {
 
     if(colour === "black"){
       _.times(4, i => {
-        let random = generateRandomID();
+        let id = generateRandomID();
+        let ap = Math.round(Math.random() * (30 - 10) + 10);
+        let hp = Math.round(Math.random() * (30 - 10) + 10);
+
         hand.push(
           <Card 
-          key = {random}
-          unique = {random}
+          key = {id}
+          unique = {id}
           name = {generateName()}
-          moveToPlay={() => this.moveToPlay("black", random)}
-          health = {Math.round(Math.random() * (30 - 10) + 10)}
-          attack = {Math.round(Math.random() * (30 - 10) + 10)}
-          player="black" />)
+          moveToPlay={() => this.moveToPlay("black", id)}
+          attackOpponent={() => this.attackOpponent("white", ap)}
+          health = {hp}
+          attack = {ap}
+          player = "black" />);
       });
     } else {
       _.times(4, i => {
-        let random = generateRandomID();
+        let id = generateRandomID();
+        let ap = Math.round(Math.random() * (30 - 10) + 10);
+        let hp = Math.round(Math.random() * (30 - 10) + 10);
+
         hand.push(
           <Card 
-          key = {random}
-          unique = {random}
+          key = {id}
+          unique = {id}
           name = {generateName()}
-          moveToPlay={() => this.moveToPlay("white", random)}
-          health = {Math.round(Math.random() * (30 - 10) + 10)}
-          attack = {Math.round(Math.random() * (30 - 10) + 10)}
-          player="white" />)
+          moveToPlay={() => this.moveToPlay("white", id)}
+          attackOpponent={() => this.attackOpponent("black", ap)}
+          health = {hp}
+          attack = {ap}
+          player = "white" />);
       });
     }
 
@@ -139,6 +166,11 @@ export default class Arena extends Component {
     return (
       <div className="container center">
         <img alt="Duel" className="logo" src={logo}/>
+
+        <div className="healthbar">
+          <div className="health">{this.state.wHealth}</div>
+          <div className="health">{this.state.bHealth}</div>
+        </div>
 
         <div className="white-hand">
           {this.state.wCardsInHand}

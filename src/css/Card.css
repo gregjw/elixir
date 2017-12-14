@@ -37,25 +37,24 @@
 }
 
 .unique {
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 'bold';
   color: '#222';
   justify-content: 'space-around';
   top: 5;
-  margin-top: 5px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 40px;
 }
 
 .attack {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 'bold';
   font-family: 'Inter UI', sans-serif;
-  color: '#222';
+  color: #FFF;
   justify-content: 'space-around';
   margin: 5px;
   background-color: #E27171;
   padding: 10px;
-  border-radius: 50%;
   text-align: left;
   display: inline;
   height: 25px;
@@ -63,15 +62,14 @@
 }
 
 .health {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 'bold';
   font-family: 'Inter UI', sans-serif;
-  color: '#222';
+  color: #FFF;
   justify-content: 'space-around';
   margin: 5px;
   background-color: #64d69f;
   padding: 10px;
-  border-radius: 50%;
   text-align: right;
   display: inline;
   height: 25px;
