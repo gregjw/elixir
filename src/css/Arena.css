@@ -52,7 +52,7 @@ body {
 .logo{
 	width: 80px;
 	position: relative;
-	animation: logo-spin infinite 20s linear;
+	animation: logo-spin infinite 10s linear;
 	padding: 5px 50px;
 	padding-bottom: 15px;
 }

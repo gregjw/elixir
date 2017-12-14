@@ -7,13 +7,23 @@ export default class Card extends Component {
 
     this.randomAttack = this.randomAttack.bind(this);
     this.randomHealth = this.randomHealth.bind(this);
+    this.generateName = this.generateName.bind(this);
 
     this.state = {
+      name : this.generateName(),
       unique : this.props.unique,
       player : this.props.player,
       attack : this.randomAttack(),
       health : this.randomHealth()
     }
+  }
+
+  generateName(){
+    var choices =
+    ['Defile','Wrath','Adapt','Valeera','Maex','Neiv','Vox','Eim','Rot'];
+
+    var generated = choices[Math.floor(Math.random()*choices.length)];
+    return generated;
   }
 
   randomAttack(){
