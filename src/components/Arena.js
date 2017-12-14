@@ -86,10 +86,12 @@ export default class Arena extends Component {
     if(card === "black"){
       let bPlayInterim = this.state.bCardsInPlay;
       let bHandInterim = this.state.bCardsInHand;
+      let focus = [];
 
       bHandInterim.map((row, i) => {
         if(row.key === current){
           bPlayInterim.push(bHandInterim[i]);
+          focus.push(bHandInterim[i])
           bHandInterim.splice(current, 1);
         }
 
@@ -98,15 +100,18 @@ export default class Arena extends Component {
 
       this.setState({
         bCardsInPlay : bPlayInterim,
-        bCardsInHand : bHandInterim
+        bCardsInHand : bHandInterim,
+        primaryFocus : focus
       });
     } else {
       let wPlayInterim = this.state.wCardsInPlay;
       let wHandInterim = this.state.wCardsInHand;
+      let focus = [];
 
       wHandInterim.map((row, i) => {
         if(row.key === current){
           wPlayInterim.push(wHandInterim[i]);
+          focus.push(wHandInterim[i])
           wHandInterim.splice(current, 1);
         }
 
@@ -115,7 +120,8 @@ export default class Arena extends Component {
 
       this.setState({
         wCardsInPlay : wPlayInterim,
-        wCardsInHand : wHandInterim
+        wCardsInHand : wHandInterim,
+        primaryFocus : focus
       });
     }
   }
