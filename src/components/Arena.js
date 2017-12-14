@@ -167,7 +167,7 @@ export default class Arena extends Component {
       <div className="container center">
         <img alt="Duel" className="logo" src={logo}/>
 
-        <div className="healthbar">
+        <div className="hp-bar center">
           <div className="health">{this.state.wHealth}</div>
           <div className="health">{this.state.bHealth}</div>
         </div>
