@@ -29,11 +29,15 @@ function generateRandomID(){
 }
 
 function generateName(){
-  var choices =
-  ['Defile','Wrath','Adapt','Valeera','Maex','Neiv','Vox','Eim','Rot'];
+  var other = ['Dief','Adyt','Valeera','Neiv','Voix','Eim','Ryot','Saut','Njörðr','Vðit','Vanir'];
+  var humanoid = ['Tifk','Jaeger','Felix','Isildor','Grimshank','McKellan',"O'Donnel",'Dalf','Shaemus'];
 
-  var generated = choices[Math.floor(Math.random()*choices.length)];
-  return generated;
+  var choices = [humanoid, other];
+
+  var first_layer = Math.floor(Math.random()*choices.length);
+  var second_layer = Math.floor(Math.random()*choices[first_layer].length);
+
+  return choices[first_layer][second_layer];
 }
 
 export default class Arena extends Component {
@@ -90,13 +94,13 @@ export default class Arena extends Component {
       focus_array[1] = current;
     }
 
-    if(focus_array[0] !== undefined && focus_array[1] !== undefined){
-      this.attackCard();
-    }
-
     this.setState({
       focus : focus_array
     });
+
+    if(focus_array[0] !== undefined && focus_array[1] !== undefined){
+      this.attackCard();
+    }
   }
 
   attackCard(){
