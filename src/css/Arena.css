@@ -15,7 +15,23 @@ body {
                                   supported by Chrome and Opera */
 }
 
-.hp-bar{
+.turn{
+	font-size: 15px;
+	color: #fff;
+	font-weight: bolder;
+	margin-top: 25px;
+}
+
+.white-hp-bar{
+	margin-bottom: 25px;
+	background-color: #BBB;
+	padding: 20px;
+	width: 125px;
+	position: relative;
+	border-radius: 5px;
+}
+
+.black-hp-bar{
 	margin-bottom: 25px;
 	background-color: #333;
 	padding: 20px;

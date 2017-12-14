@@ -41,8 +41,7 @@ export default class Arena extends Component {
     super(props);
 
     this.state = {
-      primaryFocus : [],
-      secondaryFocus : [],
+      focus : [],
       currentTurn : "black",
       bHealth : 500,
       wHealth : 500,
@@ -52,6 +51,7 @@ export default class Arena extends Component {
       wCardsInPlay : []
     }
 
+    this.addFocus = this.addFocus.bind(this);
     this.generateHand = this.generateHand.bind(this);
     this.moveToPlay = this.moveToPlay.bind(this);
     this.attackOpponent = this.attackOpponent.bind(this);
@@ -62,6 +62,22 @@ export default class Arena extends Component {
       bCardsInHand : this.generateHand("black"),
       wCardsInHand : this.generateHand("white")
     });
+  }
+
+  addFocus(current){
+    let focus_array = this.state.focus;
+
+    if(focus_array[0] === undefined){
+      focus_array[0] = current;
+    } else {
+      focus_array[1] = current;
+    }
+
+    this.setState({
+      focus : focus_array
+    });
+
+    console.log(focus_array);
   }
 
   attackOpponent(card, attack){
@@ -86,12 +102,11 @@ export default class Arena extends Component {
     if(card === "black"){
       let bPlayInterim = this.state.bCardsInPlay;
       let bHandInterim = this.state.bCardsInHand;
-      let focus = [];
 
       bHandInterim.map((row, i) => {
         if(row.key === current){
           bPlayInterim.push(bHandInterim[i]);
-          focus.push(bHandInterim[i])
+          this.addFocus(bHandInterim[i]);
           bHandInterim.splice(current, 1);
         }
 
@@ -100,18 +115,16 @@ export default class Arena extends Component {
 
       this.setState({
         bCardsInPlay : bPlayInterim,
-        bCardsInHand : bHandInterim,
-        primaryFocus : focus
+        bCardsInHand : bHandInterim
       });
     } else {
       let wPlayInterim = this.state.wCardsInPlay;
       let wHandInterim = this.state.wCardsInHand;
-      let focus = [];
 
       wHandInterim.map((row, i) => {
         if(row.key === current){
           wPlayInterim.push(wHandInterim[i]);
-          focus.push(wHandInterim[i])
+          this.addFocus(wHandInterim[i]);
           wHandInterim.splice(current, 1);
         }
 
@@ -120,8 +133,7 @@ export default class Arena extends Component {
 
       this.setState({
         wCardsInPlay : wPlayInterim,
-        wCardsInHand : wHandInterim,
-        primaryFocus : focus
+        wCardsInHand : wHandInterim
       });
     }
   }
@@ -173,9 +185,11 @@ export default class Arena extends Component {
       <div className="container center">
         <img alt="Duel" className="logo" src={logo}/>
 
-        <div className="hp-bar center">
+        <div className={ this.state.currentTurn + "-hp-bar center" }>
           <div className="health">{this.state.wHealth}</div>
           <div className="health">{this.state.bHealth}</div>
+          <br />
+          <div className="turn">Turn: {this.state.currentTurn}</div>
         </div>
 
         <div className="white-hand">
