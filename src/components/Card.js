@@ -21,11 +21,11 @@ export default class Card extends Component {
         className = {this.state.player + "-card noselect"}>
         <div className="unique">{this.state.name}</div>
         <div className="center">
-          <div className="attack">{this.state.attack}</div>
-          <div className="health">{this.state.health}</div>
+          <div className="stat attack">{this.state.attack}</div>
+          <div className="stat health">{this.state.health}</div>
           <br/><br/><br/>
-          <div className="attack">{this.state.attack}</div>
-          <div className="health">{this.state.health}</div>
+          <div className="stat stamina">{this.state.attack}</div>
+          <div className="stat agility">{this.state.health}</div>
         </div>
       </div>
     );
