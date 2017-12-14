@@ -106,6 +106,7 @@ export default class Arena extends Component {
   attackCard(){
     let focus_array = this.state.focus;
 
+    console.log(focus_array);
     if(this.state.turn === "black"){
       focus_array[0].props.health = focus_array[0].props.health - focus_array[1].props.attack;
     } else {

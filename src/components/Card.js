@@ -13,11 +13,15 @@ export default class Card extends Component {
     }
   }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({health: newProps.health});
+  }
+
   render() {
     return (
       <div
         onClick = {this.props.moveToPlay}
-        onDoubleClick = {this.props.attackOpponent}
+        onDoubleClick = {this.props.attackPlayer}
         className = {this.state.player + "-card noselect"}>
         <div className="unique">{this.state.name}</div>
         <div className="center">
