@@ -75,6 +75,10 @@ export default class Arena extends Component {
     });
   }
 
+  componentWillReceiveProps(){
+
+  }
+
   d20(){
     return Math.round(Math.random() * (20 - 0) + 0);
   }
@@ -108,9 +112,9 @@ export default class Arena extends Component {
 
     console.log(focus_array);
     if(this.state.turn === "black"){
-      focus_array[0].props.health = focus_array[0].props.health - focus_array[1].props.attack;
+      focus_array[0].setState({health: focus_array[0].props.health - focus_array[1].props.attack });
     } else {
-      focus_array[0].props.health = focus_array[1].props.health - focus_array[0].props.attack;
+      focus_array[0].setState({health: focus_array[1].props.health - focus_array[0].props.attack });
     }
   }
 
@@ -210,9 +214,9 @@ export default class Arena extends Component {
       <div className="container center">
         <img onClick={() => this.clearFocus()} alt="Duel" className="logo" src={logo}/>
 
-        <div className={ this.state.turn + "-hp-bar center" }>
-          <div className="stat white">{this.state.wHealth}</div>
-          <div className="stat black">{this.state.bHealth}</div>
+        <div className={"bar-" +  this.state.turn + " center" }>
+          <div className="stat bg-white">{this.state.wHealth}</div>
+          <div className="stat bg-black">{this.state.bHealth}</div>
           <br />
           <div className="turn">Turn: {this.state.turn}</div>
         </div>
