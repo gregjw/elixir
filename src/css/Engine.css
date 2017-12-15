@@ -56,6 +56,12 @@ body {
 	border-radius: 5px;
 }
 
+.mana{
+	height: 5px;
+	width: 5px;
+	background-color: green;
+}
+
 .bar-black{
 	margin-bottom: 25px;
 	background-color: #333;

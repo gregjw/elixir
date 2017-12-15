@@ -49,6 +49,8 @@ export default class Arena extends Component {
       turn : "black",
       bHealth : 500,
       wHealth : 500,
+      bMana : [],
+      wMana : [], 
       bCardsInHand : [],
       bCardsInPlay : [],
       wCardsInHand : [],
@@ -61,6 +63,9 @@ export default class Arena extends Component {
     this.addFocus = this.addFocus.bind(this);
 
     this.newCard = this.newCard.bind(this);
+    this.tweakCard = this.tweakCard.bind(this);
+
+    this.generateMana = this.generateMana.bind(this);
     this.generateHand = this.generateHand.bind(this);
     this.moveToPlay = this.moveToPlay.bind(this);
 
@@ -71,12 +76,10 @@ export default class Arena extends Component {
   componentDidMount(){
     this.setState({
       bCardsInHand : this.generateHand("black"),
-      wCardsInHand : this.generateHand("white")
+      wCardsInHand : this.generateHand("white"),
+      bMana : this.generateHand("black"),
+      wMana : this.generateHand("white")
     });
-  }
-
-  componentWillReceiveProps(){
-
   }
 
   d20(){
@@ -111,11 +114,33 @@ export default class Arena extends Component {
     let focus_array = this.state.focus;
 
     console.log(focus_array);
+
     if(this.state.turn === "black"){
-      focus_array[0].setState({health: focus_array[0].props.health - focus_array[1].props.attack });
+      this.tweakCard(focus_array[0].key, focus_array[0].props, focus_array[1].props);
     } else {
-      focus_array[0].setState({health: focus_array[1].props.health - focus_array[0].props.attack });
+      this.tweakCard(focus_array[1].key, focus_array[1].props, focus_array[0].props);
     }
+  }
+
+  tweakCard(key, first, second){
+    console.log(first.health);
+    console.log(second.attack);
+
+    let new_health = first.health - second.attack;
+
+    let card = <Card 
+          key = {key}
+          unique = {first.unique}
+          name = {first.name}
+          moveToPlay={first.moveToPlay}
+          attackPlayer={first.attackPlayer}
+          health = {new_health}
+          attack = {first.attack}
+          player = {first.player} />;
+
+    console.log(card.props.health);
+    
+    return card;
   }
 
   attackPlayer(card, attack){
@@ -207,6 +232,16 @@ export default class Arena extends Component {
     });
 
     return hand;
+  }
+
+  generateMana(colour){
+    var mana = [];
+
+    _.times(2, i => {
+      mana.push(<div className="mana">{colour}</div>);
+    });
+
+    return mana;
   }
 
   render() {
