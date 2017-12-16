@@ -248,7 +248,7 @@ export default class Arena extends Component {
     return (
       <div className="container center">
         <img onClick={() => this.clearFocus()} alt="Duel" className="logo" src={logo}/>
-        <div className="subtitle">A quick turn-based card game</div>
+        <div className="subtitle">a quick turn-based point-chasing card game</div>
         <div className={"bar-" +  this.state.turn + " center" }>
           <div className="stat bg-white">{this.state.wHealth}</div>
           <div className="stat bg-black">{this.state.bHealth}</div>
