@@ -56,6 +56,12 @@ body {
 	border-radius: 5px;
 }
 
+.subtitle{
+	color: #FFF;
+	font-family: 'Inter UI', sans-serif;
+	margin-bottom: 35px;
+}
+
 .mana{
 	height: 5px;
 	width: 5px;
