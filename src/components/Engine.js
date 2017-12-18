@@ -55,7 +55,11 @@ export default class Arena extends Component {
       blackCards : [],
       blueCards : [],
       whiteCards : [],
-      redCards : []
+      redCards : [],
+      blackCardsPlay : [],
+      blueCardsPlay : [],
+      whiteCardsPlay : [],
+      redCardsPlay : []
     }
 
     this.d20 = this.d20.bind(this);
@@ -204,8 +208,8 @@ export default class Arena extends Component {
 
   moveToPlay(card, current){
     if(card === "black"){
-      let bPlayInterim = this.state.blueCards; // play
-      let bHandInterim = this.state.blackCards; // hand
+      let bPlayInterim = this.state.blackCardsPlay; 
+      let bHandInterim = this.state.blackCards; 
 
       bHandInterim.map((row, i) => {
         if(row.key === current){
@@ -218,11 +222,47 @@ export default class Arena extends Component {
       });
 
       this.setState({
-        blueCards : bPlayInterim,
+        blackCardsPlay : bPlayInterim,
         blackCards : bHandInterim
       });
+    } else if(card === "red"){
+      let bPlayInterim = this.state.redCardsPlay; 
+      let bHandInterim = this.state.redCards; 
+
+      bHandInterim.map((row, i) => {
+        if(row.key === current){
+          bPlayInterim.push(bHandInterim[i]);
+          this.addFocus(bHandInterim[i]);
+          bHandInterim.splice(current, 1);
+        }
+
+        return current;
+      });
+
+      this.setState({
+        redCardsPlay : bPlayInterim,
+        redCards : bHandInterim
+      });
+    } else if(card === "blue"){
+      let bPlayInterim = this.state.blueCardsPlay; 
+      let bHandInterim = this.state.blueCards; 
+
+      bHandInterim.map((row, i) => {
+        if(row.key === current){
+          bPlayInterim.push(bHandInterim[i]);
+          this.addFocus(bHandInterim[i]);
+          bHandInterim.splice(current, 1);
+        }
+
+        return current;
+      });
+
+      this.setState({
+        blueCardsPlay : bPlayInterim,
+        blueCards : bHandInterim
+      });
     } else {
-      let wPlayInterim = this.state.redCards;
+      let wPlayInterim = this.state.whiteCardsPlay;
       let wHandInterim = this.state.whiteCards;
 
       wHandInterim.map((row, i) => {
@@ -236,7 +276,7 @@ export default class Arena extends Component {
       });
 
       this.setState({
-        redCards : wPlayInterim,
+        whiteCardsPlay : wPlayInterim,
         whiteCards : wHandInterim
       });
     }
@@ -259,9 +299,30 @@ export default class Arena extends Component {
         <img onClick={() => this.clearFocus()} alt="Elixir" className="logo" src={logo}/>
         <div className="subtitle">a quick-paced potion-brewing card game</div>
         <div className={"bar-" +  this.state.turn + " center" }>
-          <div className="stat bg-white">{this.state.score}</div>
-          <br />
-          <div className="turn">Time remaining: {this.state.timeRemaining}s </div>
+          <div className="time">
+            Time remaining
+            <br /><br />
+            {this.state.timeRemaining} seconds
+          </div>
+        </div>
+        <div className="score center">{this.state.score}</div>
+
+        <div className="hand-container center">
+          <div className="white-hand">
+            {this.state.whiteCardsPlay}
+          </div>
+
+          <div className="blue-hand">
+            {this.state.blueCardsPlay}
+          </div>
+
+          <div className="red-hand">
+            {this.state.redCardsPlay}
+          </div>
+
+          <div className="black-hand">
+            {this.state.blackCardsPlay}
+          </div>
         </div>
 
         <div className="hand-container center">

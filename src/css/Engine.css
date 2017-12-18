@@ -14,15 +14,33 @@ body {
 	user-select: none;
 }
 
-.turn{
+.time{
 	font-size: 15px;
 	color: #fff;
 	font-weight: bolder;
+}
+
+.score {
+	font-size: 16px;
+	font-weight: 'bold';
+	font-family: 'Inter UI', sans-serif;
+	color: #222;
+	background-color: #fff;
+	margin: 5px;
 	margin-top: 25px;
+	padding: 10px;
+	text-align: center;
+	position: relative;
+	display: block;
+	width: 250px;
+	margin-bottom: 25px;
+	padding: 20px;
+	width: 125px;
+	border-radius: 5px;
 }
 
 .stat {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 'bold';
   font-family: 'Inter UI', sans-serif;
   color: #FFF;
@@ -42,18 +60,12 @@ body {
 	color: #fff;
 }
 
-.bg-white{
-	background-color: #FFF;
-	color: #222;
-	width: 100%;
-}
 
 .bar-white{
 	margin-bottom: 25px;
 	background-color: #BBB;
 	padding: 20px;
 	width: 125px;
-	position: relative;
 	border-radius: 5px;
 }
 
@@ -68,7 +80,6 @@ body {
 	background-color: #333;
 	padding: 20px;
 	width: 125px;
-	position: relative;
 	border-radius: 5px;
 }
 
