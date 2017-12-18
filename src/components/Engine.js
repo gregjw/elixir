@@ -85,7 +85,9 @@ export default class Arena extends Component {
       blackCards : this.generateHand("black"),
       whiteCards : this.generateHand("white"),
       blueCards : this.generateHand("blue"),
-      redCards : this.generateHand("red")
+      redCards : this.generateHand("red"),
+      whiteCardsPlay : this.generateTarget("white"),
+      blackCardsPlay : this.generateTarget("black")
     });
 
     this.startTimer();
@@ -282,6 +284,24 @@ export default class Arena extends Component {
     }
   }
 
+  generateTarget(colour){
+    let id = generateRandomID();
+    let ap = Math.round(Math.random() * (30 - 10) + 10);
+    let hp = Math.round(Math.random() * (30 - 10) + 10);
+
+    let card = <Card 
+          key = {id}
+          unique = {id}
+          name = {generateName()}
+          health = {hp}
+          attack = {ap}
+          player = {colour} />;
+
+    var hand = [];
+    hand.push(card);
+    return hand;
+  } 
+
   generateHand(colour){
     var hand = [];
     hand.push(this.newCard(colour));
@@ -307,20 +327,12 @@ export default class Arena extends Component {
         </div>
         <div className="score center">{this.state.score}</div>
 
-        <div className="hand-container center">
-          <div className="white-hand">
+        <div className="hand-container">
+          <div className="white-play">
             {this.state.whiteCardsPlay}
           </div>
 
-          <div className="blue-hand">
-            {this.state.blueCardsPlay}
-          </div>
-
-          <div className="red-hand">
-            {this.state.redCardsPlay}
-          </div>
-
-          <div className="black-hand">
+          <div className="black-play">
             {this.state.blackCardsPlay}
           </div>
         </div>
