@@ -1,6 +1,6 @@
-![Duel](https://i.imgur.com/Ky2HnI9.png)
-# Duel
-Open source card game mechanics system 🎲  
+![Elixir](https://i.imgur.com/Ky2HnI9.png)
+# Elixir
+A quick-paced potion-brewing card game 🎩🎲  
   
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
