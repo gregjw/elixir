@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import '../css/Engine.css';
 import Card from './Card.js';
+import Dialog from './Dialog.js';
 import logo from '../assets/d20.png';
 
 function generateRandomID(){
@@ -29,7 +30,7 @@ function generateRandomID(){
 }
 
 function generateName(){
-  var leaves = ['Pine Needle','Fir Leaf','Oak Leaf','Chesnut','Pinecone','Birch Leaf','Fern','Shrub'];
+  var leaves = ['Pine Needle','Fir Leaf','Oak Leaf','Chesnut','Pinecone','Birch Leaf','Fern','Shrub','Earth root','Silverleaf','Peacebloom','Nightmare Thorn','Adders Bite','Whiptail','Grave moss','Tombrot','Briarthorn','Bruiseweed','Fadeleaf','Volatile Fireweed','Fools Cap','Starleaf','Sungrass','Liferoot','Plucked Poppy','Tiger Lily','Rotnettle','Twistedbloom','Corrupted nettle ','Life Essence','Fire Essence','Living Essence','Burning vine','Ogres thumb','Ghouls claw','Rabbit droppings','Starlight dust','Archmages hair','Crystalized vine','Ghost nettle ','Fire Scale','Scattered Dragonscale ','Cobalt silversage','Pheonix Ashes','Decaying Lichweed'];
   var misc = ['Quill','Feather','Dirt','Mud','Sand','Dust'];
 
   var choices = [leaves, misc];
@@ -52,6 +53,8 @@ export default class Arena extends Component {
       score : 0,
       bHealth : 500,
       wHealth : 500,
+      target : [],
+      base : [],
       blackCards : [],
       blueCards : [],
       whiteCards : [],
@@ -86,8 +89,8 @@ export default class Arena extends Component {
       whiteCards : this.generateHand("white"),
       blueCards : this.generateHand("blue"),
       redCards : this.generateHand("red"),
-      whiteCardsPlay : this.generateTarget("white"),
-      blackCardsPlay : this.generateTarget("black")
+      target : this.generateTarget("white"),
+      base : this.generateBase("black")
     });
 
     this.startTimer();
@@ -120,9 +123,14 @@ export default class Arena extends Component {
     let focus_array = this.state.focus;
 
     if(focus_array[0] === undefined){
+      console.log("FOCUS 1: " + current);
       focus_array[0] = current;
-    } else {
+    } else if(focus_array[1] === undefined){
+      console.log("FOCUS 2: " + current);
       focus_array[1] = current;
+    } else {
+      focus_array[0] = current;
+      focus_array[1] = undefined;
     }
 
     this.setState({
@@ -137,34 +145,51 @@ export default class Arena extends Component {
   attackCard(){
     let focus_array = this.state.focus;
 
-    console.log(focus_array);
-
     if(this.state.turn === "black"){
-      this.tweakCard(focus_array[0].key, focus_array[0].props, focus_array[1].props);
+      this.tweakCard(focus_array[0].props, focus_array[1].props);
     } else {
-      this.tweakCard(focus_array[1].key, focus_array[1].props, focus_array[0].props);
+      this.tweakCard(focus_array[1].props, focus_array[0].props);
     }
   }
 
-  tweakCard(key, first, second){
-    console.log(first.health);
-    console.log(second.attack);
+  tweakCard(first, second){
+    let new_attack = first.attack + second.attack;
+    let new_health = first.health + second.health;
 
-    let new_health = first.health - second.attack;
+    let newBase = [];
 
     let card = <Card 
-          key = {key}
-          unique = {first.unique}
-          name = {first.name}
-          moveToPlay={first.moveToPlay}
-          attackPlayer={first.attackPlayer}
-          health = {new_health}
-          attack = {first.attack}
-          player = {first.player} />;
+      key = {generateRandomID()}
+      unique = {first.unique}
+      name = {first.name}
+      moveToPlay={first.moveToPlay}
+      attackPlayer={first.attackPlayer}
+      health = {new_health}
+      attack = {new_attack}
+      player = "black" />;
 
-    console.log(card.props.health);
+    if(this.state.base !== []){
+      var base_card = this.state.base[0];
+      new_attack += base_card.props.attack;
+      new_health += base_card.props.health;
 
-    return card;
+      card = <Card 
+        key = {generateRandomID()}
+        unique = {first.unique}
+        name = {first.name}
+        moveToPlay={first.moveToPlay}
+        attackPlayer={first.attackPlayer}
+        health = {new_health}
+        attack = {new_attack}
+        player = "black" />;
+    }
+
+    newBase.push(card);
+
+    this.setState({
+      focus : [],
+      base : newBase
+    });
   }
 
   attackPlayer(card, attack){
@@ -210,22 +235,22 @@ export default class Arena extends Component {
 
   moveToPlay(card, current){
     if(card === "black"){
-      let bPlayInterim = this.state.blackCardsPlay; 
-      let bHandInterim = this.state.blackCards; 
+      let PlayInterim = this.state.blackCardsPlay; 
+      let HandInterim = this.state.blackCards; 
 
-      bHandInterim.map((row, i) => {
+      HandInterim.map((row, i) => {
         if(row.key === current){
-          bPlayInterim.push(bHandInterim[i]);
-          this.addFocus(bHandInterim[i]);
-          bHandInterim.splice(current, 1);
+          PlayInterim.push(HandInterim[i]);
+          this.addFocus(HandInterim[i]);
+          HandInterim.splice(current, 1);
         }
 
         return current;
       });
 
       this.setState({
-        blackCardsPlay : bPlayInterim,
-        blackCards : bHandInterim
+        blackCardsPlay : PlayInterim,
+        blackCards : HandInterim
       });
     } else if(card === "red"){
       let bPlayInterim = this.state.redCardsPlay; 
@@ -289,18 +314,36 @@ export default class Arena extends Component {
     let ap = Math.round(Math.random() * (30 - 10) + 10);
     let hp = Math.round(Math.random() * (30 - 10) + 10);
 
-    let card = <Card 
+    let card = <Dialog 
           key = {id}
           unique = {id}
           name = {generateName()}
-          health = {hp}
-          attack = {ap}
+          stat1 = {hp}
+          stat2 = {ap}
           player = {colour} />;
 
     var hand = [];
     hand.push(card);
     return hand;
   } 
+
+  generateBase(colour){
+    let id = generateRandomID();
+    let ap = 10;
+    let hp = 10;
+
+    let card = <Card 
+          key = {id}
+          unique = {id}
+          name = "Potion"
+          attack = {ap}
+          health = {hp}
+          player = {colour} />;
+
+    var hand = [];
+    hand.push(card);
+    return hand;
+  }
 
   generateHand(colour){
     var hand = [];
@@ -329,11 +372,11 @@ export default class Arena extends Component {
 
         <div className="hand-container">
           <div className="white-play">
-            {this.state.whiteCardsPlay}
+            {this.state.target}
           </div>
 
           <div className="black-play">
-            {this.state.blackCardsPlay}
+            {this.state.base}
           </div>
         </div>
 
