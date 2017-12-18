@@ -155,6 +155,8 @@ export default class Arena extends Component {
   tweakCard(first, second){
     let new_attack = first.attack + second.attack;
     let new_health = first.health + second.health;
+    let new_xp = first.xp + second.xp;
+    let new_cost = first.cost + second.cost;
 
     let newBase = [];
 
@@ -166,12 +168,16 @@ export default class Arena extends Component {
       attackPlayer={first.attackPlayer}
       health = {new_health}
       attack = {new_attack}
+      xp = {new_xp}
+      cost = {new_cost}
       player = "black" />;
 
     if(this.state.base !== []){
       var base_card = this.state.base[0];
       new_attack += base_card.props.attack;
       new_health += base_card.props.health;
+      new_xp += base_card.props.xp;
+      new_cost += base_card.props.cost;
 
       card = <Card 
         key = {generateRandomID()}
@@ -181,6 +187,8 @@ export default class Arena extends Component {
         attackPlayer={first.attackPlayer}
         health = {new_health}
         attack = {new_attack}
+        xp = {new_xp}
+        cost = {new_cost}
         player = "black" />;
     }
 
@@ -210,8 +218,11 @@ export default class Arena extends Component {
 
   newCard(colour){
     let id = generateRandomID();
-    let ap = Math.round(Math.random() * (30 - 10) + 10);
+    let ap = Math.round(Math.random() * (50 - 10) + 10);
     let hp = Math.round(Math.random() * (30 - 10) + 10);
+    let xp = Math.round(Math.random() * (30 - 10) + 10);
+    let cost = Math.round(Math.random() * (25 - 10) + 25);
+
     let opponent = "black";
 
     if(colour === "white"){
@@ -228,6 +239,8 @@ export default class Arena extends Component {
           attackPlayer={() => this.attackPlayer(opponent, ap)}
           health = {hp}
           attack = {ap}
+          xp = {xp}
+          cost = {cost}
           player = {colour} />;
 
     return card;
@@ -235,58 +248,64 @@ export default class Arena extends Component {
 
   moveToPlay(card, current){
     if(card === "black"){
-      let PlayInterim = this.state.blackCardsPlay; 
-      let HandInterim = this.state.blackCards; 
+      let playInterim = this.state.blackCardsPlay; 
+      let handInterim = this.state.blackCards; 
 
-      HandInterim.map((row, i) => {
+      handInterim.map((row, i) => {
         if(row.key === current){
-          PlayInterim.push(HandInterim[i]);
-          this.addFocus(HandInterim[i]);
-          HandInterim.splice(current, 1);
+          playInterim.push(handInterim[i]);
+          this.addFocus(handInterim[i]);
+          handInterim.splice(current, 1);
         }
 
         return current;
       });
 
+      handInterim = this.generateHand("black");
+
       this.setState({
-        blackCardsPlay : PlayInterim,
-        blackCards : HandInterim
+        blackCardsPlay : playInterim,
+        blackCards : handInterim
       });
     } else if(card === "red"){
-      let bPlayInterim = this.state.redCardsPlay; 
-      let bHandInterim = this.state.redCards; 
+      let playInterim = this.state.redCardsPlay; 
+      let handInterim = this.state.redCards; 
 
-      bHandInterim.map((row, i) => {
+      handInterim.map((row, i) => {
         if(row.key === current){
-          bPlayInterim.push(bHandInterim[i]);
-          this.addFocus(bHandInterim[i]);
-          bHandInterim.splice(current, 1);
+          playInterim.push(handInterim[i]);
+          this.addFocus(handInterim[i]);
+          handInterim.splice(current, 1);
         }
 
         return current;
       });
 
+      handInterim = this.generateHand("red");
+
       this.setState({
-        redCardsPlay : bPlayInterim,
-        redCards : bHandInterim
+        redCardsPlay : playInterim,
+        redCards : handInterim
       });
     } else if(card === "blue"){
-      let bPlayInterim = this.state.blueCardsPlay; 
-      let bHandInterim = this.state.blueCards; 
+      let playInterim = this.state.blueCardsPlay; 
+      let handInterim = this.state.blueCards; 
 
-      bHandInterim.map((row, i) => {
+      handInterim.map((row, i) => {
         if(row.key === current){
-          bPlayInterim.push(bHandInterim[i]);
-          this.addFocus(bHandInterim[i]);
-          bHandInterim.splice(current, 1);
+          playInterim.push(handInterim[i]);
+          this.addFocus(handInterim[i]);
+          handInterim.splice(current, 1);
         }
 
         return current;
       });
 
+      handInterim = this.generateHand("blue");
+
       this.setState({
-        blueCardsPlay : bPlayInterim,
-        blueCards : bHandInterim
+        blueCardsPlay : playInterim,
+        blueCards : handInterim
       });
     } else {
       let wPlayInterim = this.state.whiteCardsPlay;
@@ -302,6 +321,8 @@ export default class Arena extends Component {
         return current;
       });
 
+      wHandInterim = this.generateHand("white");
+
       this.setState({
         whiteCardsPlay : wPlayInterim,
         whiteCards : wHandInterim
@@ -311,8 +332,10 @@ export default class Arena extends Component {
 
   generateTarget(colour){
     let id = generateRandomID();
-    let ap = Math.round(Math.random() * (30 - 10) + 10);
-    let hp = Math.round(Math.random() * (30 - 10) + 10);
+    let ap = Math.round(Math.random() * (350 - 100) + 100);
+    let hp = Math.round(Math.random() * (350 - 100) + 100);
+    let xp = Math.round(Math.random() * (30 - 10) + 10);
+    let cost = Math.round(Math.random() * (25 - 10) + 25);
 
     let card = <Dialog 
           key = {id}
@@ -320,6 +343,8 @@ export default class Arena extends Component {
           name = {generateName()}
           stat1 = {hp}
           stat2 = {ap}
+          stat3 = {xp}
+          stat4 = {cost}
           player = {colour} />;
 
     var hand = [];
@@ -331,6 +356,8 @@ export default class Arena extends Component {
     let id = generateRandomID();
     let ap = 10;
     let hp = 10;
+    let xp = Math.round(Math.random() * (30 - 10) + 10);
+    let cost = Math.round(Math.random() * (25 - 10) + 25);
 
     let card = <Card 
           key = {id}
@@ -338,6 +365,8 @@ export default class Arena extends Component {
           name = "Potion"
           attack = {ap}
           health = {hp}
+          cost = {cost}
+          xp = {xp}
           player = {colour} />;
 
     var hand = [];

@@ -9,7 +9,9 @@ export default class Card extends Component {
       player : this.props.player,
       name   : this.props.name,
       attack : this.props.attack,
-      health : this.props.health
+      health : this.props.health,
+      cost : this.props.cost,
+      xp : this.props.xp
     }
   }
 
@@ -28,8 +30,8 @@ export default class Card extends Component {
           <div className="stat attack">{this.state.attack}</div>
           <div className="stat health">{this.state.health}</div>
           <br/><br/><br/>
-          <div className="stat stamina">{this.state.attack}</div>
-          <div className="stat agility">{this.state.health}</div>
+          <div className="stat stamina">{this.state.cost}</div>
+          <div className="stat agility">{this.state.xp}</div>
         </div>
       </div>
     );
