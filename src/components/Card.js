@@ -22,7 +22,7 @@ export default class Card extends Component {
       <div
         onClick = {this.props.moveToPlay}
         onDoubleClick = {this.props.attackPlayer}
-        className = {this.state.player + "-card noselect"}>
+        className = {"card " + this.state.player + "-card noselect"}>
         <div className="unique">{this.state.name}</div>
         <div className="center">
           <div className="stat attack">{this.state.attack}</div>

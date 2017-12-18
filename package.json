@@ -1,9 +1,9 @@
 {
-  "name": "duel",
+  "name": "elixir",
   "version": "0.1.0",
   "private": true,
   "license" : "Unlicense",
-  "homepage" : "http://gregjw.github.io/duel",
+  "homepage" : "http://gregjw.github.io/elixir",
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

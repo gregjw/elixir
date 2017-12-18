@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 import '../css/Engine.css';
 import Card from './Card.js';
@@ -47,14 +47,15 @@ export default class Arena extends Component {
     this.state = {
       focus : [],
       turn : "black",
+      interval : null,
+      timeRemaining : 120,
+      score : 0,
       bHealth : 500,
       wHealth : 500,
-      bMana : [],
-      wMana : [], 
-      bCardsInHand : [],
-      bCardsInPlay : [],
-      wCardsInHand : [],
-      wCardsInPlay : []
+      blackCards : [],
+      blueCards : [],
+      whiteCards : [],
+      redCards : []
     }
 
     this.d20 = this.d20.bind(this);
@@ -65,21 +66,38 @@ export default class Arena extends Component {
     this.newCard = this.newCard.bind(this);
     this.tweakCard = this.tweakCard.bind(this);
 
-    this.generateMana = this.generateMana.bind(this);
     this.generateHand = this.generateHand.bind(this);
     this.moveToPlay = this.moveToPlay.bind(this);
 
     this.attackPlayer = this.attackPlayer.bind(this);
     this.attackCard = this.attackCard.bind(this);
+
+    this.tick = this.tick.bind(this);
+    this.startTimer = this.startTimer.bind(this);
   }
 
   componentDidMount(){
     this.setState({
-      bCardsInHand : this.generateHand("black"),
-      wCardsInHand : this.generateHand("white"),
-      bMana : this.generateHand("black"),
-      wMana : this.generateHand("white")
+      blackCards : this.generateHand("black"),
+      whiteCards : this.generateHand("white"),
+      blueCards : this.generateHand("blue"),
+      redCards : this.generateHand("red")
     });
+
+    this.startTimer();
+  }
+
+  startTimer(){
+    let interval = setInterval(this.tick, 1000);
+    this.setState({ interval: interval });
+  }
+
+  tick(){
+    if (this.state.timeRemaining > 0){
+      this.setState({ timeRemaining: this.state.timeRemaining - 1 });
+    } else {
+      clearInterval(this.state.interval);
+    }
   }
 
   d20(){
@@ -186,8 +204,8 @@ export default class Arena extends Component {
 
   moveToPlay(card, current){
     if(card === "black"){
-      let bPlayInterim = this.state.bCardsInPlay;
-      let bHandInterim = this.state.bCardsInHand;
+      let bPlayInterim = this.state.blueCards; // play
+      let bHandInterim = this.state.blackCards; // hand
 
       bHandInterim.map((row, i) => {
         if(row.key === current){
@@ -200,12 +218,12 @@ export default class Arena extends Component {
       });
 
       this.setState({
-        bCardsInPlay : bPlayInterim,
-        bCardsInHand : bHandInterim
+        blueCards : bPlayInterim,
+        blackCards : bHandInterim
       });
     } else {
-      let wPlayInterim = this.state.wCardsInPlay;
-      let wHandInterim = this.state.wCardsInHand;
+      let wPlayInterim = this.state.redCards;
+      let wHandInterim = this.state.whiteCards;
 
       wHandInterim.map((row, i) => {
         if(row.key === current){
@@ -218,59 +236,51 @@ export default class Arena extends Component {
       });
 
       this.setState({
-        wCardsInPlay : wPlayInterim,
-        wCardsInHand : wHandInterim
+        redCards : wPlayInterim,
+        whiteCards : wHandInterim
       });
     }
   }
 
   generateHand(colour){
     var hand = [];
+    hand.push(this.newCard(colour));
 
-    _.times(4, i => {
-      hand.push(this.newCard(colour));
-    });
+    // _.times(1, i => {
+    //   hand.push(this.newCard(colour));
+    // });
 
     return hand;
-  }
-
-  generateMana(colour){
-    var mana = [];
-
-    _.times(2, i => {
-      mana.push(<div className="mana">{colour}</div>);
-    });
-
-    return mana;
   }
 
   render() {
     return (
       <div className="container center">
-        <img onClick={() => this.clearFocus()} alt="Duel" className="logo" src={logo}/>
-        <div className="subtitle">a quick turn-based point-chasing card game</div>
+        <img onClick={() => this.clearFocus()} alt="Elixir" className="logo" src={logo}/>
+        <div className="subtitle">a quick-paced potion-brewing card game</div>
         <div className={"bar-" +  this.state.turn + " center" }>
-          <div className="stat bg-white">{this.state.wHealth}</div>
-          <div className="stat bg-black">{this.state.bHealth}</div>
+          <div className="stat bg-white">{this.state.score}</div>
           <br />
-          <div className="turn">Turn: {this.state.turn}</div>
+          <div className="turn">Time remaining: {this.state.timeRemaining}s </div>
         </div>
 
-        <div className="white-hand">
-          {this.state.wCardsInHand}
-        </div>
+        <div className="hand-container center">
+          <div className="white-hand">
+            {this.state.whiteCards}
+          </div>
 
-        <div className="white-play">
-          {this.state.wCardsInPlay}
-        </div>
+          <div className="blue-hand">
+            {this.state.blueCards}
+          </div>
 
+          <div className="red-hand">
+            {this.state.redCards}
+          </div>
 
-        <div className="black-hand">
-          {this.state.bCardsInHand}
-        </div>
+          <div className="black-hand">
+            {this.state.blackCards}
+          </div>
 
-        <div className="black-play">
-          {this.state.bCardsInPlay}
         </div>
       </div>
     );

@@ -1,5 +1,4 @@
-.black-card {
-  background-color: #222;
+.card{
   color: #FFF;
   margin: 15px;
   margin-top: 5px;
@@ -8,32 +7,32 @@
   width: 100px;
   padding-bottom: 30px;
   cursor: pointer;
-  border: 5px solid #333;
   transition: .3s;
 }
 
-.black-card:hover{
+.card:hover{
   border: 5px solid #fc4e59;
-  transition: .3s;
+}
+
+.black-card {
+  background-color: #222;
+  border: 5px solid #151515;
 }
 
 .white-card {
   background-color: #FFF;
   color: #222;
-  margin: 15px;
-  margin-top: 5px;
-  border-radius: 5px;
-  padding: 10px;
-  width: 100px;
-  padding-bottom: 30px;
-  cursor: pointer;
-  border: 5px solid #FAFAFA;
-  transition: .3s;
+  border: 5px solid #DEDEDE;
 }
 
-.white-card:hover{
-  border: 5px solid #fc4e59;
-  transition: .3s;
+.red-card {
+  background-color: #ad4040;
+  border: 5px solid #8c2c2e;
+}
+
+.blue-card {
+  background-color: #2a5f93;
+  border: 5px solid #1b3f66;
 }
 
 .unique {
