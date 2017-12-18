@@ -29,10 +29,10 @@ function generateRandomID(){
 }
 
 function generateName(){
-  var other = ['Dief','Adyt','Valeera','Neiv','Voix','Eim','Ryot','Saut','Njörðr','Vðit','Vanir'];
-  var humanoid = ['Tifk','Jaeger','Felix','Isildor','Grimshank','McKellan',"O'Donnel",'Dalf','Shaemus'];
+  var leaves = ['Pine Needle','Fir Leaf','Oak Leaf','Chesnut','Pinecone','Birch Leaf','Fern','Shrub'];
+  var misc = ['Quill','Feather','Dirt','Mud','Sand','Dust'];
 
-  var choices = [humanoid, other];
+  var choices = [leaves, misc];
 
   var first_layer = Math.floor(Math.random()*choices.length);
   var second_layer = Math.floor(Math.random()*choices[first_layer].length);
