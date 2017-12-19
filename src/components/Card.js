@@ -20,9 +20,17 @@ export default class Card extends Component {
   }
 
   render() {
+    let clickFunction = this.props.moveToPlay;
+
+    if(this.props.check !== undefined){
+      clickFunction = this.props.check;
+    } else {
+      clickFunction = this.props.moveToPlay;
+    }
+
     return (
       <div
-        onClick = {this.props.moveToPlay}
+        onClick = {clickFunction}
         onContextMenu = {this.props.discard}
         className = {"card " + this.state.player + "-card noselect"}>
         <div className="unique">{this.state.name}</div>

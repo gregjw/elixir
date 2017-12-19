@@ -22,7 +22,7 @@ export default class Card extends Component {
         I need a potion with at least <span className="dialog-stat text-attack">{this.state.stat1}</span> as well as 
         <span className="dialog-stat text-health"> {this.state.stat4}</span> but please, dont exceed <span className="dialog-stat text-agility">{this.state.stat4}</span>.
         <br/><br/>
-        Times are tough for a {this.state.character}.
+        Times are tough for a {this.state.character} like me.
       </div>
     );
   }

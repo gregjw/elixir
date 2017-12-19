@@ -7,32 +7,32 @@ import Dialog from './Dialog.js';
 import logo from '../assets/d20.png';
 
 function generateRandomID(){
-  var dictionary =
+  let dictionary =
   ['a','b','c','d','e','f','g','h','i','j','k','l','m',
   'n','o','p','q','r','s','t','u','v','w','x','y','z',
   'A','B','C','D','E','F','G','H','I','J','K','L','M',
   'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
   '0','1','2','3','4','5','6','7','8','9'];
 
-  var d1 = dictionary[Math.floor(Math.random()*dictionary.length)];
-  var d2 = dictionary[Math.floor(Math.random()*dictionary.length)];
-  var d3 = dictionary[Math.floor(Math.random()*dictionary.length)];
-  var d4 = dictionary[Math.floor(Math.random()*dictionary.length)];
-  var d5 = dictionary[Math.floor(Math.random()*dictionary.length)];
-  var d6 = dictionary[Math.floor(Math.random()*dictionary.length)];
-  var d7 = dictionary[Math.floor(Math.random()*dictionary.length)];
-  var d8 = dictionary[Math.floor(Math.random()*dictionary.length)];
-  var d9 = dictionary[Math.floor(Math.random()*dictionary.length)];
-  var d10 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d1 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d2 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d3 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d4 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d5 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d6 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d7 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d8 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d9 = dictionary[Math.floor(Math.random()*dictionary.length)];
+  let d10 = dictionary[Math.floor(Math.random()*dictionary.length)];
 
-  var generated = d1 + d2 + d3 + d4 + d5 + d6 + d7 + d8 + d9 + d10;
+  let generated = d1 + d2 + d3 + d4 + d5 + d6 + d7 + d8 + d9 + d10;
   return generated;
 }
 
 function generateName(){
-  var choices_array = ['Pine Needle','Fir Leaf','Oak Leaf','Chesnut','Pinecone','Birch Leaf','Fern','Shrub','Earth root','Silverleaf','Peacebloom','Nightmare Thorn','Adders Bite','Whiptail','Grave moss','Tombrot','Briarthorn','Bruiseweed','Fadeleaf','Volatile Fireweed','Fools Cap','Starleaf','Sungrass','Liferoot','Plucked Poppy','Tiger Lily','Rotnettle','Twistedbloom','Corrupted nettle ','Life Essence','Fire Essence','Living Essence','Burning vine','Ogres thumb','Ghouls claw','Rabbit droppings','Starlight dust','Archmages hair','Crystalized vine','Ghost nettle ','Fire Scale','Scattered Dragonscale ','Cobalt silversage','Pheonix Ashes','Decaying Lichweed'];
+  let choices_array = ['Pine Needle','Fir Leaf','Oak Leaf','Chesnut','Pinecone','Birch Leaf','Fern','Shrub','Earth root','Silverleaf','Peacebloom','Nightmare Thorn','Adders Bite','Whiptail','Grave moss','Tombrot','Briarthorn','Bruiseweed','Fadeleaf','Volatile Fireweed','Fools Cap','Starleaf','Sungrass','Liferoot','Plucked Poppy','Tiger Lily','Rotnettle','Twistedbloom','Corrupted nettle ','Life Essence','Fire Essence','Living Essence','Burning vine','Ogres thumb','Ghouls claw','Rabbit droppings','Starlight dust','Archmages hair','Crystalized vine','Ghost nettle ','Fire Scale','Scattered Dragonscale ','Cobalt silversage','Pheonix Ashes','Decaying Lichweed'];
 
-  var choice = Math.floor(Math.random()*choices_array.length);
+  let choice = Math.floor(Math.random()*choices_array.length);
 
   return choices_array[choice];
 }
@@ -45,7 +45,7 @@ export default class Arena extends Component {
       focus : [],
       turn : "black",
       interval : null,
-      timeRemaining : 120,
+      timeRemaining : 30,
       score : 0,
       bHealth : 500,
       wHealth : 500,
@@ -69,6 +69,7 @@ export default class Arena extends Component {
 
     this.generateHand = this.generateHand.bind(this);
     this.moveToPlay = this.moveToPlay.bind(this);
+    this.checkScore = this.checkScore.bind(this);
 
     this.tick = this.tick.bind(this);
     this.startTimer = this.startTimer.bind(this);
@@ -88,7 +89,7 @@ export default class Arena extends Component {
   }
 
   startTimer(){
-    this.setState({ interval: setInterval(this.tick, 1000) });
+    this.setState({ timeRemaining : 30, interval: setInterval(this.tick, 1000) });
   }
 
   tick(){
@@ -100,15 +101,39 @@ export default class Arena extends Component {
   }
 
   restart(){
-    this.setState({ timeRemaining : 120 });
+    this.setState({ timeRemaining : 30 });
   }
 
   d20(){
     return Math.round(Math.random() * (20 - 0) + 0);
   }
 
+  checkScore(){
+    let base = this.state.base;
+    let target = this.state.target; 
+    let score = this.state.score;
+
+    if(base[0].props.attack > target[0].props.stat1){
+      if(base[0].props.cost < target[0].props.stat4){
+        let base = this.generateBase("black");
+
+        let target = this.generateTarget("white");
+
+        this.setState({ score : score + 10, base : base, target: target});
+        this.startTimer();
+      } else {
+        let base = this.generateBase("black");
+
+        let target = this.generateTarget("white");
+
+        this.setState({ score : score - 10, base : base, target: target});
+        this.startTimer();
+      }
+    }
+  }
+
   discard(colour, current){
-    var handInterim = [];
+    let handInterim = [];
 
     if(colour === "blue"){
       handInterim = this.state.blueCards;
@@ -160,20 +185,15 @@ export default class Arena extends Component {
   moveToPlay(card, current){
     let newBase = [];
     let new_card = [];
-    let playInterim = [];
     let handInterim = [];
 
-    if(card === "blue"){
-      playInterim = this.state.blueCardsPlay; 
+    if(card === "blue"){ 
       handInterim = this.state.blueCards; 
     } else if(card === "red"){
-      playInterim = this.state.redCardsPlay; 
       handInterim = this.state.redCards; 
     } else if(card === "black"){
-      playInterim = this.state.blackCardsPlay; 
       handInterim = this.state.blackCards; 
-    } else if(card === "white"){
-      playInterim = this.state.whiteCardsPlay; 
+    } else if(card === "white"){ 
       handInterim = this.state.whiteCards;
     }
 
@@ -185,7 +205,8 @@ export default class Arena extends Component {
           let new_xp = handInterim[i].props.xp;
           let new_cost = handInterim[i].props.cost;
 
-          var base_card = this.state.base[0];
+          let base_card = this.state.base[0];
+          console.log(base_card);
           new_attack += base_card.props.attack;
           new_health += base_card.props.health;
           new_xp += base_card.props.xp;
@@ -194,6 +215,7 @@ export default class Arena extends Component {
           new_card = <Card 
             key = {generateRandomID()}
             unique = {generateRandomID()}
+            check={() => this.checkScore()}
             name = "Current Potion"
             health = {new_health}
             attack = {new_attack}
@@ -251,7 +273,7 @@ export default class Arena extends Component {
           stat4 = {cost}
           player = {colour} />;
 
-    var hand = [];
+    let hand = [];
     hand.push(card);
     return hand;
   } 
@@ -271,17 +293,18 @@ export default class Arena extends Component {
           health = {hp}
           cost = {cost}
           xp = {xp}
+          check={() => this.checkScore()}
           moveToPlay={() => this.moveToPlay("base", id)}
           type = "base"
           player = {colour} />;
 
-    var hand = [];
+    let hand = [];
     hand.push(card);
     return hand;
   }
 
   generateHand(colour){
-    var hand = [];
+    let hand = [];
     hand.push(this.generateCard(colour));
     return hand;
   }
