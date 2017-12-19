@@ -77,6 +77,7 @@ export default class Arena extends Component {
 
   componentDidMount(){
     this.startGame();
+    ua_track("Game", "Started");
   }
 
   componentWillUnmount(){
