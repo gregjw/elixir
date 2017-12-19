@@ -309,12 +309,12 @@ export default class Arena extends Component {
           <div className="time">
             Time remaining: {this.state.timeRemaining} seconds
             <br /><br />
-            Current score: {this.state.score}
+            Current score: {this.state.score} points
           </div>
         </div>
        
         <div className="play-container">
-          <div className="white-play">
+          <div className="white-play animated slideInLeft">
             {this.state.target}
           </div>
 

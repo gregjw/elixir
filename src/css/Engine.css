@@ -63,7 +63,7 @@ body {
 	display: inline;
 	border-radius: 3px;
 	height: 25px;
-	max-width: 25px;
+	min-width: 40px;
 }
 
 .bg-black{
