@@ -313,7 +313,7 @@ export default class Arena extends Component {
       <div className="container center">
         <img onClick={() => this.startGame()} alt="Elixir" className="logo" src={logo}/>
         <div className="subtitle">a quick-paced potion-brewing card game</div>
-        <div className="bar-black center">
+        <div className="bar center">
           <div className="time">
             Time remaining: {this.state.timeRemaining} seconds
             <br /><br />
@@ -335,20 +335,20 @@ export default class Arena extends Component {
 
         <div className="hand-container items center">
           <div className="ingredient-text">Click on a card to add ingredients to your potion</div>
-
-          <div className="white-hand item animated flipInX">
+          <br/>
+          <div className="hand white-hand item animated flipInX">
             {this.state.whiteCards}
           </div>
 
-          <div className="blue-hand item animated flipInX">
+          <div className="hand blue-hand item animated flipInX">
             {this.state.blueCards}
           </div>
 
-          <div className="red-hand item animated flipInX">
+          <div className="hand red-hand item animated flipInX">
             {this.state.redCards}
           </div>
 
-          <div className="black-hand item animated flipInX">
+          <div className="hand black-hand item animated flipInX">
             {this.state.blackCards}
           </div>
 

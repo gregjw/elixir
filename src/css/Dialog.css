@@ -21,27 +21,6 @@
   color: #ccc;
 }
 
-.black-dialog {
-  background-color: #222;
-  border: 5px solid #151515;
-}
-
-.white-dialog {
-  background-color: #FFF;
-  color: #222;
-  border: 5px solid #DEDEDE;
-}
-
-.red-dialog {
-  background-color: #ad4040;
-  border: 5px solid #8c2c2e;
-}
-
-.blue-dialog {
-  background-color: #2a5f93;
-  border: 5px solid #1b3f66;
-}
-
 .text-attack {
   color: #E27171;
 }
