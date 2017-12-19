@@ -34,7 +34,7 @@ export default class Card extends Component {
         onClick = {clickFunction}
         onContextMenu = {this.props.discard}
         className = {"card " + this.state.player + "-card noselect animated flipInX"}>
-        <div className="unique">{this.state.name}</div>
+        <div className="card-name">{this.state.name}</div>
         <div className="center">
           <div className="stat attack">{this.state.attack}</div>
           <div className="stat health">{this.state.health}</div>

@@ -334,7 +334,7 @@ export default class Arena extends Component {
         </div>
 
         <div className="hand-container items center">
-          <div className="instruction-header">Click on a card to add ingredients to your potion</div>
+          <div className="instruction-header">Click on an ingredient card to add it to your potion</div>
           <br/>
           <div className="hand white-hand item animated flipInX">
             {this.state.whiteCards}
