@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import '../css/Dialog.css';
 
+function generateName(){
+  let choices_array = ['mage','wizard','knight','strange man','strange woman','mysterious old woman','mysterious old man'];
+
+  let choice = Math.floor(Math.random()*choices_array.length);
+
+  return choices_array[choice];
+}
+
 export default class Card extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       name  : this.props.name,
-      character : "mage",
+      character : generateName(),
       attack : this.props.attack,
       health : this.props.health,
       stamina : this.props.stamina,
