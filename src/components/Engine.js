@@ -36,7 +36,7 @@ function generateRandomID(){
 }
 
 function generateName(){
-  let choices_array = ['Pine Needle','Fir Leaf','Oak Leaf','Chesnut','Pinecone','Birch Leaf','Fern','Shrub','Earth root','Silverleaf','Peacebloom','Nightmare Thorn','Adders Bite','Whiptail','Grave moss','Tombrot','Briarthorn','Bruiseweed','Fadeleaf','Volatile Fireweed','Fools Cap','Starleaf','Sungrass','Liferoot','Plucked Poppy','Tiger Lily','Rotnettle','Twistedbloom','Corrupted nettle ','Life Essence','Fire Essence','Living Essence','Burning vine','Ogres thumb','Ghouls claw','Rabbit droppings','Starlight dust','Archmages hair','Crystalized vine','Ghost nettle ','Fire Scale','Scattered Dragonscale ','Cobalt silversage','Pheonix Ashes','Decaying Lichweed'];
+  let choices_array = ['Pine Needle','Fir Leaf','Oak Leaf','Chesnut','Pinecone','Birch Leaf','Fern','Shrub','Earth root','Silverleaf','Peacebloom','Nightmare Thorn','Adders Bite','Whiptail','Grave moss','Tombrot','Briarthorn','Bruiseweed','Fadeleaf','Volatile Fireweed','Fools Cap','Starleaf','Sungrass','Liferoot','Plucked Poppy','Tiger Lily','Rotnettle','Twistedbloom','Corrupted nettle ','Life Essence','Fire Essence','Living Essence','Burning vine','Ogres thumb','Ghouls claw','Rabbit droppings','Starlight dust','Archmages hair','Crystalized vine','Ghost nettle ','Scattered dragonscale ','Cobalt','Pheonix ashes','Lichweed','Wolfbane','Mandrake Root','Opium','Hemlock'];
 
   let choice = Math.floor(Math.random()*choices_array.length);
 
@@ -116,7 +116,7 @@ export default class Arena extends Component {
     let score = this.state.score;
 
     if(this.state.timeRemaining > 0){
-      if(base[0].props.attack > target[0].props.attack){
+      if(base[0].props.mana > target[0].props.mana){
         if(base[0].props.cost < target[0].props.cost){
           this.setState({ score : score + 10 });
           this.startGame();
@@ -131,26 +131,33 @@ export default class Arena extends Component {
   discard(colour, current){
     let handInterim = [];
 
-    if(colour === "blue"){
-      handInterim = this.state.blueCards;
-      handInterim.splice(current, 1);
-      handInterim.push(this.generateCard(colour));
-      this.setState({blueCards: handInterim});
-    } else if(colour === "red"){
-      handInterim = this.state.redCards;
-      handInterim.splice(current, 1);
-      handInterim.push(this.generateCard(colour));
-      this.setState({redCards: handInterim}); 
-    } else if(colour === "black"){
-      handInterim = this.state.blackCards; 
-      handInterim.splice(current, 1);
-      handInterim.push(this.generateCard(colour));
-      this.setState({blackCards: handInterim});
-    } else if(colour === "white"){
-      handInterim = this.state.whiteCards;
-      handInterim.splice(current, 1);
-      handInterim.push(this.generateCard(colour));
-      this.setState({whiteCards: handInterim});
+    switch(colour) {
+      case "blue":
+        handInterim = this.state.blueCards;
+        handInterim.splice(current, 1);
+        handInterim.push(this.generateCard(colour));
+        this.setState({blueCards: handInterim});
+        break;
+      case "red":
+        handInterim = this.state.redCards;
+        handInterim.splice(current, 1);
+        handInterim.push(this.generateCard(colour));
+        this.setState({redCards: handInterim}); 
+        break;
+      case "black":
+        handInterim = this.state.blackCards; 
+        handInterim.splice(current, 1);
+        handInterim.push(this.generateCard(colour));
+        this.setState({blackCards: handInterim});
+        break;
+      case "white":
+        handInterim = this.state.whiteCards;
+        handInterim.splice(current, 1);
+        handInterim.push(this.generateCard(colour));
+        this.setState({whiteCards: handInterim});
+        break;
+      default:
+        break;
     }
 
     return true;
@@ -160,7 +167,7 @@ export default class Arena extends Component {
     let id = generateRandomID();
     let ap = Math.round(Math.random() * (50 - 10) + 10);
     let hp = Math.round(Math.random() * (30 - 10) + 10);
-    let xp = Math.round(Math.random() * (30 - 10) + 10);
+    let stamina = Math.round(Math.random() * (30 - 10) + 10);
     let cost = Math.round(Math.random() * (25 - 10) + 25);
 
     let card = <Card 
@@ -170,8 +177,8 @@ export default class Arena extends Component {
       moveToPlay={() => this.moveToPlay(colour, id)}
       discard={() => this.discard(colour, id)}
       health = {hp}
-      attack = {ap}
-      xp = {xp}
+      mana = {ap}
+      stamina = {stamina}
       cost = {cost}
       player = {colour} />;
 
@@ -183,29 +190,36 @@ export default class Arena extends Component {
     let new_card = [];
     let handInterim = [];
 
-    if(colour === "blue"){ 
-      handInterim = this.state.blueCards; 
-    } else if(colour === "red"){
-      handInterim = this.state.redCards; 
-    } else if(colour === "black"){
-      handInterim = this.state.blackCards; 
-    } else if(colour === "white"){ 
-      handInterim = this.state.whiteCards;
+    switch(colour){
+      case "blue":
+        handInterim = this.state.blueCards; 
+        break;
+      case "red":
+        handInterim = this.state.redCards; 
+        break;
+      case "black":
+        handInterim = this.state.blackCards;
+        break;
+      case "white":
+        handInterim = this.state.whiteCards; 
+        break; 
+      default:
+        break;  
     }
 
     handInterim.map((row, i) => {
       if(row.key === current){
         if(this.state.base !== []){
-          let new_attack = handInterim[i].props.attack;
+          let new_mana = handInterim[i].props.mana;
           let new_health = handInterim[i].props.health;
-          let new_xp = handInterim[i].props.xp;
+          let new_stamina = handInterim[i].props.stamina;
           let new_cost = handInterim[i].props.cost;
 
           let base_card = this.state.base[0];
 
-          new_attack += base_card.props.attack;
+          new_mana += base_card.props.mana;
           new_health += base_card.props.health;
-          new_xp += base_card.props.xp;
+          new_stamina += base_card.props.stamina;
           new_cost += base_card.props.cost;
 
           new_card = <Card 
@@ -214,8 +228,8 @@ export default class Arena extends Component {
             check={() => this.checkScore()}
             name = "Your Potion"
             health = {new_health}
-            attack = {new_attack}
-            xp = {new_xp}
+            mana = {new_mana}
+            stamina = {new_stamina}
             cost = {new_cost}
             type = "base"
             player = "black" />;
@@ -229,26 +243,33 @@ export default class Arena extends Component {
     handInterim.splice(current, 1);
     handInterim.push(this.generateCard(colour));
 
-    if(colour === "blue"){
-      this.setState({
-        base : newBase,
-        blueCards : handInterim
-      });
-    } else if(colour === "red"){
-      this.setState({
-        base : newBase,
-        redCards : handInterim
-      });
-    } else if(colour === "black"){
-      this.setState({
-        base : newBase,
-        blackCards : handInterim
-      });
-    } else if(colour === "white"){
-      this.setState({
-        base : newBase,
-        whiteCards : handInterim
-      });
+    switch(colour) {
+      case "blue":
+        this.setState({
+          base : newBase,
+          blueCards : handInterim
+        });
+        break;
+      case "red":
+        this.setState({
+          base : newBase,
+          redCards : handInterim
+        });
+        break;
+      case "black":
+        this.setState({
+          base : newBase,
+          blackCards : handInterim
+        });
+        break;
+      case "white":
+        this.setState({
+          base : newBase,
+          whiteCards : handInterim
+        });
+        break;
+      default:
+        break;
     }
 
     this.checkScore();
@@ -258,19 +279,19 @@ export default class Arena extends Component {
     let id = generateRandomID();
     let ap = Math.round(Math.random() * (350 - 100) + 100);
     let hp = Math.round(Math.random() * (350 - 100) + 100);
-    let xp = Math.round(Math.random() * (300 - 100) + 100);
+    let stamina = Math.round(Math.random() * (300 - 100) + 100);
     let cost = Math.round(Math.random() * (250 - 100) + 100);
 
     let card = <Dialog 
-          key = {id}
-          unique = {id}
-          name = {generateName()}
-          attack = {hp}
-          stat2 = {ap}
-          stat3 = {xp}
-          restart = {() => this.startGame()}
-          cost = {cost}
-          player = "white" />;
+      key = {id}
+      unique = {id}
+      name = {generateName()}
+      stat1 = {hp}
+      stat2 = {ap}
+      stat3 = {stamina}
+      restart = {() => this.startGame()}
+      cost = {cost}
+      player = "white" />;
 
     let hand = [];
     hand.push(card);
@@ -281,17 +302,17 @@ export default class Arena extends Component {
     let id = generateRandomID();
     let ap = 10;
     let hp = 10;
-    let xp = 10;
+    let stamina = 10;
     let cost = Math.round(Math.random() * (40 - 10) + 10);
 
     let card = <Card 
       key = {id}
       unique = {id}
       name = "Your Potion"
-      attack = {ap}
+      mana = {ap}
       health = {hp}
       cost = {cost}
-      xp = {xp}
+      stamina = {stamina}
       restart={() => this.startGame()}
       moveToPlay={() => this.moveToPlay("base", id)}
       type = "base"
@@ -312,7 +333,9 @@ export default class Arena extends Component {
     return (
       <div className="container center">
         <img onClick={() => this.startGame()} alt="Elixir" className="logo" src={logo}/>
+
         <div className="subtitle">a quick-paced potion-brewing card game</div>
+
         <div className="bar center">
           <div className="time">
             Time remaining: {this.state.timeRemaining} seconds

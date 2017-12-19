@@ -9,10 +9,10 @@ export default class Card extends Component {
     this.state = {
       player : this.props.player,
       name   : this.props.name,
-      attack : this.props.attack,
+      mana : this.props.mana,
       health : this.props.health,
-      cost : this.props.cost,
-      xp : this.props.xp
+      stamina : this.props.stamina,
+      cost : this.props.cost
     }
   }
 
@@ -36,10 +36,10 @@ export default class Card extends Component {
         className = {"card " + this.state.player + "-card noselect animated flipInX"}>
         <div className="card-name">{this.state.name}</div>
         <div className="center">
-          <div className="stat attack">{this.state.attack}</div>
+          <div className="stat mana">{this.state.mana}</div>
           <div className="stat health">{this.state.health}</div>
           <br/><br/><br/>
-          <div className="stat stamina">{this.state.xp}</div>
+          <div className="stat stamina">{this.state.stamina}</div>
           <div className="stat agility">{this.state.cost}</div>
         </div>
       </div>

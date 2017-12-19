@@ -7,16 +7,16 @@ function generateName(){
   return choices_array[choice];
 }
 
-export default class Card extends Component {
+export default class Dialog extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       name  : this.props.name,
       character : generateName(),
-      attack : this.props.attack,
-      health : this.props.health,
-      stamina : this.props.stamina,
+      mana : this.props.stat1,
+      health : this.props.stat2,
+      stamina : this.props.stat3,
       cost : this.props.cost
     }
   }
@@ -26,8 +26,8 @@ export default class Card extends Component {
       <div onClick={this.props.restart} className="dialog animated slideInLeft">
         <div className="descriptor">A {this.state.character} walks in and croaks </div>
 
-        I need a potion with at least <span className="dialog-stat text-attack">{this.state.attack}</span> as well as 
-        <span className="dialog-stat text-health"> {this.state.cost}</span> but please, dont exceed <span className="dialog-stat text-agility">{this.state.cost}</span>.
+        I need a potion with at least <span className="dialog-stat text-mana">{this.state.mana} mana</span> as well as 
+        <span className="dialog-stat text-stamina"> {this.state.stamina} stamina</span> but please, dont exceed <span className="dialog-stat text-agility">{this.state.cost} coins</span>.
         
         <br/><br/>
 
