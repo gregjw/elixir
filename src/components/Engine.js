@@ -258,7 +258,7 @@ export default class Arena extends Component {
     let ap = Math.round(Math.random() * (350 - 100) + 100);
     let hp = Math.round(Math.random() * (350 - 100) + 100);
     let xp = Math.round(Math.random() * (300 - 100) + 100);
-    let cost = Math.round(Math.random() * (250 - 100) + 250);
+    let cost = Math.round(Math.random() * (250 - 100) + 100);
 
     let card = <Dialog 
           key = {id}
@@ -281,7 +281,7 @@ export default class Arena extends Component {
     let ap = 10;
     let hp = 10;
     let xp = 10;
-    let cost = 25;
+    let cost = Math.round(Math.random() * (40 - 10) + 10);
 
     let card = <Card 
           key = {id}
