@@ -6,6 +6,12 @@ import Card from './Card.js';
 import Dialog from './Dialog.js';
 import logo from '../assets/d20.png';
 
+function track(category, action){
+  var ua = require('universal-analytics');
+  var visitor = ua('UA-81505538-1');
+  visitor.event(category, action).send();
+}
+
 function generateRandomID(){
   let dictionary =
   ['a','b','c','d','e','f','g','h','i','j','k','l','m',
@@ -75,6 +81,10 @@ export default class Arena extends Component {
 
   componentDidMount(){
     this.startGame();
+  }
+
+  componentWillUnmount(){
+    // track("Session", this.state.score);
   }
 
   startGame(){
@@ -261,6 +271,7 @@ export default class Arena extends Component {
           attack = {hp}
           stat2 = {ap}
           stat3 = {xp}
+          restart = {() => this.startGame()}
           cost = {cost}
           player = "white" />;
 
@@ -314,31 +325,33 @@ export default class Arena extends Component {
         </div>
        
         <div className="play-container">
-          <div className="white-play animated slideInLeft">
-            {this.state.target}
-          </div>
+          <div className="items">
+            <div className="white-play item animated slideInLeft">
+              {this.state.target}
+            </div>
 
-          <div className="black-play animated slideInRight">
-            {this.state.base}
+            <div className="black-play item animated slideInRight">
+              {this.state.base}
+            </div>
           </div>
         </div>
 
-        <div className="hand-container center">
+        <div className="hand-container items center">
           <div className="ingredient-text">Click on a card to add ingredients to your potion</div>
 
-          <div className="white-hand animated flipInX">
+          <div className="white-hand item animated flipInX">
             {this.state.whiteCards}
           </div>
 
-          <div className="blue-hand animated flipInX">
+          <div className="blue-hand item animated flipInX">
             {this.state.blueCards}
           </div>
 
-          <div className="red-hand animated flipInX">
+          <div className="red-hand item animated flipInX">
             {this.state.redCards}
           </div>
 
-          <div className="black-hand animated flipInX">
+          <div className="black-hand item animated flipInX">
             {this.state.blackCards}
           </div>
 
