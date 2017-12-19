@@ -1,38 +1,47 @@
-.card{
-  color: #FFF;
-  margin: 15px;
-  margin-top: 5px;
+.dialog{
+  color: #333;
+  margin: 10px;
+  line-height: 25px;
   border-radius: 5px;
-  padding: 10px;
-  width: 100px;
-  padding-bottom: 30px;
+  font-size: 13px;
   cursor: pointer;
+  background-color: #fff;
+  padding: 25px;
+  text-align: left;
+  font-family: 'Inter UI', sans-serif;
+  font-weight: bolder;
   transition: .3s;
 }
 
-.card:hover{
-  border: 5px solid #fc4e59;/*
-  margin-top: 15px;
-  padding-bottom: -15px;*/
+.dialog-stat{
+  font-size: 12px;
+  padding-top: 5px;
+  margin: 5px;
+  padding-bottom: 5px;
 }
 
-.black-card {
+.descriptor{
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.black-dialog {
   background-color: #222;
   border: 5px solid #151515;
 }
 
-.white-card {
+.white-dialog {
   background-color: #FFF;
   color: #222;
   border: 5px solid #DEDEDE;
 }
 
-.red-card {
+.red-dialog {
   background-color: #ad4040;
   border: 5px solid #8c2c2e;
 }
 
-.blue-card {
+.blue-dialog {
   background-color: #2a5f93;
   border: 5px solid #1b3f66;
 }
@@ -45,7 +54,6 @@
   top: 5;
   margin-top: 10px;
   margin-bottom: 40px;
-  height: 25px;
 }
 
 .attack{

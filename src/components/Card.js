@@ -23,15 +23,15 @@ export default class Card extends Component {
     return (
       <div
         onClick = {this.props.moveToPlay}
-        onDoubleClick = {this.props.attackPlayer}
+        onDoubleClick = {this.props.discard}
         className = {"card " + this.state.player + "-card noselect"}>
         <div className="unique">{this.state.name}</div>
         <div className="center">
           <div className="stat attack">{this.state.attack}</div>
           <div className="stat health">{this.state.health}</div>
           <br/><br/><br/>
-          <div className="stat stamina">{this.state.cost}</div>
-          <div className="stat agility">{this.state.xp}</div>
+          <div className="stat stamina">{this.state.xp}</div>
+          <div className="stat agility">{this.state.cost}</div>
         </div>
       </div>
     );
