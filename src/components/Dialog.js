@@ -14,9 +14,9 @@ export default class Dialog extends Component {
     this.state = {
       name  : this.props.name,
       character : generateName(),
-      mana : this.props.stat1,
-      health : this.props.stat2,
-      stamina : this.props.stat3,
+      mana : this.props.mana,
+      health : this.props.health,
+      stamina : this.props.stamina,
       cost : this.props.cost
     }
   }

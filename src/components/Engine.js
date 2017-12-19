@@ -36,7 +36,7 @@ function generateRandomID(){
 }
 
 function generateName(){
-  let choices_array = ['Pine Needle','Fir Leaf','Oak Leaf','Chesnut','Pinecone','Birch Leaf','Fern','Shrub','Earth root','Silverleaf','Peacebloom','Nightmare Thorn','Adders Bite','Whiptail','Grave moss','Tombrot','Briarthorn','Bruiseweed','Fadeleaf','Volatile Fireweed','Fools Cap','Starleaf','Sungrass','Liferoot','Plucked Poppy','Tiger Lily','Rotnettle','Twistedbloom','Corrupted nettle ','Life Essence','Fire Essence','Living Essence','Burning vine','Ogres thumb','Ghouls claw','Rabbit droppings','Starlight dust','Archmages hair','Crystalized vine','Ghost nettle ','Scattered dragonscale ','Cobalt','Pheonix ashes','Lichweed','Wolfbane','Mandrake Root','Opium','Hemlock'];
+  let choices_array = ['Pine needle','Fir leaf','Oak leaf','Pine cone','Birch leaf','Fern','Shrub','Sapling root','Peacebloom','Nightmare thorn','Adders bite','Whiptail','Grave moss','Tombrot','Briarthorn','Bruiseweed','Fadeleaf','Volatile fireweed','Fools cap','Sungrass','Liferoot','Poppyseed','Lily','Rotnettle','Twisted bloom','Corrupted nettle ','Life essence','Fire essence','Living essence','Burning vine','Ogres thumb','Ghouls claw','Starlight dust','Archmages hair','Crystalized vine','Ghost nettle','Scattered dragonscale','Cobalt','Pheonix ashes','Lichweed','Wolfbane','Mandrake root','Opium','Hemlock'];
 
   let choice = Math.floor(Math.random()*choices_array.length);
 
@@ -116,7 +116,7 @@ export default class Arena extends Component {
     let score = this.state.score;
 
     if(this.state.timeRemaining > 0){
-      if(base[0].props.mana > target[0].props.mana){
+      if(base[0].props.mana > target[0].props.mana && base[0].props.stamina > target[0].props.stamina){
         if(base[0].props.cost < target[0].props.cost){
           this.setState({ score : score + 10 });
           this.startGame();
@@ -165,10 +165,10 @@ export default class Arena extends Component {
 
   generateCard(colour){
     let id = generateRandomID();
-    let ap = Math.round(Math.random() * (50 - 10) + 10);
+    let ap = Math.round(Math.random() * (75 - 10) + 10);
     let hp = Math.round(Math.random() * (30 - 10) + 10);
     let stamina = Math.round(Math.random() * (30 - 10) + 10);
-    let cost = Math.round(Math.random() * (25 - 10) + 25);
+    let cost = Math.round(Math.random() * (50 - 10) + 10);
 
     let card = <Card 
       key = {id}
@@ -277,20 +277,20 @@ export default class Arena extends Component {
 
   generateTarget(){
     let id = generateRandomID();
-    let ap = Math.round(Math.random() * (350 - 100) + 100);
-    let hp = Math.round(Math.random() * (350 - 100) + 100);
-    let stamina = Math.round(Math.random() * (300 - 100) + 100);
-    let cost = Math.round(Math.random() * (250 - 100) + 100);
+    let ap = Math.round(Math.random() * (1000 - 500) + 500);
+    let hp = Math.round(Math.random() * (1000 - 500) + 500);
+    let stamina = Math.round(Math.random() * (1000 - 500) + 500);
+    let cost = Math.round(Math.random() * (1250 - 500) + 500);
 
     let card = <Dialog 
       key = {id}
       unique = {id}
       name = {generateName()}
-      stat1 = {hp}
-      stat2 = {ap}
-      stat3 = {stamina}
-      restart = {() => this.startGame()}
+      mana = {ap}
+      health = {hp}
+      stamina = {stamina}
       cost = {cost}
+      restart = {() => this.startGame()}
       player = "white" />;
 
     let hand = [];
@@ -303,7 +303,7 @@ export default class Arena extends Component {
     let ap = 10;
     let hp = 10;
     let stamina = 10;
-    let cost = Math.round(Math.random() * (40 - 10) + 10);
+    let cost = Math.round(Math.random() * (30 - 10) + 10);
 
     let card = <Card 
       key = {id}
