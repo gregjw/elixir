@@ -62,7 +62,8 @@ export default class Arena extends Component {
     }
 
     this.d20 = this.d20.bind(this);
-    this.restart = this.restart.bind(this);
+    this.tick = this.tick.bind(this);
+    this.startTimer = this.startTimer.bind(this);
 
     this.generateCard = this.generateCard.bind(this);
     this.discard = this.discard.bind(this);
@@ -70,9 +71,6 @@ export default class Arena extends Component {
     this.generateHand = this.generateHand.bind(this);
     this.moveToPlay = this.moveToPlay.bind(this);
     this.checkScore = this.checkScore.bind(this);
-
-    this.tick = this.tick.bind(this);
-    this.startTimer = this.startTimer.bind(this);
   }
 
   componentDidMount(){
@@ -89,6 +87,7 @@ export default class Arena extends Component {
   }
 
   startTimer(){
+    clearInterval(this.state.interval);
     this.setState({ timeRemaining : 30, interval: setInterval(this.tick, 1000) });
   }
 
@@ -98,10 +97,6 @@ export default class Arena extends Component {
     } else {
       clearInterval(this.state.interval);
     }
-  }
-
-  restart(){
-    this.setState({ timeRemaining : 30 });
   }
 
   d20(){
@@ -116,14 +111,12 @@ export default class Arena extends Component {
     if(base[0].props.attack > target[0].props.stat1){
       if(base[0].props.cost < target[0].props.stat4){
         let base = this.generateBase("black");
-
         let target = this.generateTarget("white");
 
         this.setState({ score : score + 10, base : base, target: target});
         this.startTimer();
       } else {
         let base = this.generateBase("black");
-
         let target = this.generateTarget("white");
 
         this.setState({ score : score - 10, base : base, target: target});
@@ -312,17 +305,18 @@ export default class Arena extends Component {
   render() {
     return (
       <div className="container center">
-        <img onClick={() => this.restart()} alt="Elixir" className="logo" src={logo}/>
+        <img onClick={() => this.startTimer()} alt="Elixir" className="logo" src={logo}/>
         <div className="subtitle">a quick-paced potion-brewing card game</div>
-        <div className={"bar-" +  this.state.turn + " center" }>
+        <div className="bar-black center">
           <div className="time">
             Time remaining
-            <br /><br />
+            <br/><br/>
             {this.state.timeRemaining} seconds
+            <br /><br />
+            Current score: {this.state.score}
           </div>
         </div>
-        <div className="score center">{this.state.score}</div>
-
+       
         <div className="play-container">
           <div className="white-play">
             {this.state.target}
