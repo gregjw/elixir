@@ -62,7 +62,7 @@ export default class Arena extends Component {
     }
 
     this.d20 = this.d20.bind(this);
-    this.clearFocus = this.clearFocus.bind(this);
+    this.restart = this.restart.bind(this);
 
     this.generateCard = this.generateCard.bind(this);
     this.discard = this.discard.bind(this);
@@ -88,8 +88,7 @@ export default class Arena extends Component {
   }
 
   startTimer(){
-    let interval = setInterval(this.tick, 1000);
-    this.setState({ interval: interval });
+    this.setState({ interval: setInterval(this.tick, 1000) });
   }
 
   tick(){
@@ -100,14 +99,12 @@ export default class Arena extends Component {
     }
   }
 
-  d20(){
-    return Math.round(Math.random() * (20 - 0) + 0);
+  restart(){
+    this.setState({ timeRemaining : 120 });
   }
 
-  clearFocus(){
-    this.setState({
-      focus : []
-    });
+  d20(){
+    return Math.round(Math.random() * (20 - 0) + 0);
   }
 
   discard(colour, current){
@@ -116,18 +113,22 @@ export default class Arena extends Component {
     if(colour === "blue"){
       handInterim = this.state.blueCards;
       handInterim.splice(current, 1);
+      handInterim.push(this.generateCard(colour));
       this.setState({blueCards: handInterim});
     } else if(colour === "red"){
       handInterim = this.state.redCards;
       handInterim.splice(current, 1);
+      handInterim.push(this.generateCard(colour));
       this.setState({redCards: handInterim}); 
     } else if(colour === "black"){
       handInterim = this.state.blackCards; 
       handInterim.splice(current, 1);
+      handInterim.push(this.generateCard(colour));
       this.setState({blackCards: handInterim});
     } else if(colour === "white"){
       handInterim = this.state.whiteCards;
       handInterim.splice(current, 1);
+      handInterim.push(this.generateCard(colour));
       this.setState({whiteCards: handInterim});
     }
 
@@ -193,7 +194,7 @@ export default class Arena extends Component {
           new_card = <Card 
             key = {generateRandomID()}
             unique = {generateRandomID()}
-            name = "Current Mixture"
+            name = "Current Potion"
             health = {new_health}
             attack = {new_attack}
             xp = {new_xp}
@@ -237,8 +238,8 @@ export default class Arena extends Component {
     let id = generateRandomID();
     let ap = Math.round(Math.random() * (350 - 100) + 100);
     let hp = Math.round(Math.random() * (350 - 100) + 100);
-    let xp = Math.round(Math.random() * (30 - 10) + 10);
-    let cost = Math.round(Math.random() * (25 - 10) + 25);
+    let xp = Math.round(Math.random() * (300 - 100) + 100);
+    let cost = Math.round(Math.random() * (250 - 100) + 250);
 
     let card = <Dialog 
           key = {id}
@@ -265,7 +266,7 @@ export default class Arena extends Component {
     let card = <Card 
           key = {id}
           unique = {id}
-          name = "Current Mixture"
+          name = "Current Potion"
           attack = {ap}
           health = {hp}
           cost = {cost}
@@ -288,7 +289,7 @@ export default class Arena extends Component {
   render() {
     return (
       <div className="container center">
-        <img onClick={() => this.clearFocus()} alt="Elixir" className="logo" src={logo}/>
+        <img onClick={() => this.restart()} alt="Elixir" className="logo" src={logo}/>
         <div className="subtitle">a quick-paced potion-brewing card game</div>
         <div className={"bar-" +  this.state.turn + " center" }>
           <div className="time">
@@ -299,7 +300,7 @@ export default class Arena extends Component {
         </div>
         <div className="score center">{this.state.score}</div>
 
-        <div className="hand-container">
+        <div className="play-container">
           <div className="white-play">
             {this.state.target}
           </div>
@@ -310,7 +311,7 @@ export default class Arena extends Component {
         </div>
 
         <div className="hand-container center">
-          <div className="ingredient-text">Click to add ingredients to your current mixture</div>
+          <div className="ingredient-text">Click to add ingredients to your current potion</div>
 
           <div className="white-hand">
             {this.state.whiteCards}

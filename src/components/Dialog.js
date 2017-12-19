@@ -18,9 +18,11 @@ export default class Card extends Component {
   render() {
     return (
       <div className="dialog">
-        <div className="descriptor"> A {this.state.character} walks in and croaks </div>
-        I need a potion with <div className="stat dialog-stat attack">{this.state.stat1}</div> as well as 
-        <div className="stat dialog-stat health">{this.state.stat2}</div> but dont exceed <div className="stat dialog-stat attack">{this.state.stat1}</div>
+        <div className="descriptor">A {this.state.character} walks in and croaks </div>
+        I need a potion with at least <span className="dialog-stat text-attack">{this.state.stat1}</span> as well as 
+        <span className="dialog-stat text-health"> {this.state.stat4}</span> but please, dont exceed <span className="dialog-stat text-agility">{this.state.stat4}</span>.
+        <br/><br/>
+        Times are tough for a {this.state.character}.
       </div>
     );
   }

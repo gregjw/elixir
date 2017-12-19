@@ -23,7 +23,7 @@ export default class Card extends Component {
     return (
       <div
         onClick = {this.props.moveToPlay}
-        onDoubleClick = {this.props.discard}
+        onContextMenu = {this.props.discard}
         className = {"card " + this.state.player + "-card noselect"}>
         <div className="unique">{this.state.name}</div>
         <div className="center">

@@ -1,28 +1,20 @@
 .dialog{
   color: #333;
-  margin: 10px;
   line-height: 25px;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 15px;
+  height: 170px;
   cursor: pointer;
-  background-color: #fff;
   padding: 25px;
   text-align: left;
   font-family: 'Inter UI', sans-serif;
-  font-weight: bolder;
   transition: .3s;
 }
 
-.dialog-stat{
-  font-size: 12px;
-  padding-top: 5px;
-  margin: 5px;
-  padding-bottom: 5px;
-}
-
 .descriptor{
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-style: italic;
+  color: #ccc;
 }
 
 .black-dialog {
@@ -46,28 +38,18 @@
   border: 5px solid #1b3f66;
 }
 
-.unique {
-  font-size: 15px;
-  font-weight: 'bold';
-  color: '#222';
-  justify-content: 'space-around';
-  top: 5;
-  margin-top: 10px;
-  margin-bottom: 40px;
+.text-attack {
+  color: #E27171;
 }
 
-.attack{
-  background-color: #E27171;
+.text-health {
+  color: #64d69f;
 }
 
-.health {
-  background-color: #64d69f;
+.text-stamina{
+  color: #ddb2f7;
 }
 
-.stamina{
-  background-color: #ddb2f7;
-}
-
-.agility{
-  background-color: #6d95f7;
+.text-agility{
+  color: #6d95f7;
 }
