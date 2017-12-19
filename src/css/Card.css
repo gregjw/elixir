@@ -3,16 +3,14 @@
   margin: 15px;
   margin-top: 5px;
   border-radius: 5px;
-  padding: 10px;
+  padding: 7.5px;
   padding-bottom: 30px;
   cursor: pointer;
   transition: .3s;
 }
 
 .card:hover{
-  border: 5px solid #fc4e59;/*
-  margin-top: 15px;
-  padding-bottom: -15px;*/
+  border: 5px solid #fc4e59;
 }
 
 .black-card {
@@ -27,13 +25,13 @@
 }
 
 .red-card {
-  background-color: #ad4040;
-  border: 5px solid #8c2c2e;
+  background-color: #AD4040;
+  border: 5px solid #8C2C2E;
 }
 
 .blue-card {
-  background-color: #2a5f93;
-  border: 5px solid #1b3f66;
+  background-color: #2A5F93;
+  border: 5px solid #1B3F66;
 }
 
 .unique {

@@ -6,7 +6,7 @@ import Card from './Card.js';
 import Dialog from './Dialog.js';
 import logo from '../assets/d20.png';
 
-function track(category, action){
+function ua_track(category, action){
   var ua = require('universal-analytics');
   var visitor = ua('UA-81505538-1');
   visitor.event(category, action).send();
@@ -48,13 +48,9 @@ export default class Arena extends Component {
     super(props);
 
     this.state = {
-      focus : [],
-      turn : "black",
+      score : 0,
       interval : null,
       timeRemaining : 30,
-      score : 0,
-      bHealth : 500,
-      wHealth : 500,
       target : [],
       base : [],
       blackCards : [],
@@ -67,15 +63,15 @@ export default class Arena extends Component {
       redCardsPlay : []
     }
 
-    this.d20 = this.d20.bind(this);
-    this.tick = this.tick.bind(this);
     this.startGame = this.startGame.bind(this);
-
     this.generateCard = this.generateCard.bind(this);
     this.discard = this.discard.bind(this);
 
     this.generateHand = this.generateHand.bind(this);
     this.moveToPlay = this.moveToPlay.bind(this);
+
+    this.d20 = this.d20.bind(this);
+    this.tick = this.tick.bind(this);
     this.checkScore = this.checkScore.bind(this);
   }
 
@@ -84,7 +80,7 @@ export default class Arena extends Component {
   }
 
   componentWillUnmount(){
-    // track("Session", this.state.score);
+    ua_track("Session", this.state.score);
   }
 
   startGame(){
@@ -156,7 +152,7 @@ export default class Arena extends Component {
       this.setState({whiteCards: handInterim});
     }
 
-    return false;
+    return true;
   }
 
   generateCard(colour){
@@ -181,18 +177,18 @@ export default class Arena extends Component {
     return card;
   }
 
-  moveToPlay(card, current){
+  moveToPlay(colour, current){
     let newBase = [];
     let new_card = [];
     let handInterim = [];
 
-    if(card === "blue"){ 
+    if(colour === "blue"){ 
       handInterim = this.state.blueCards; 
-    } else if(card === "red"){
+    } else if(colour === "red"){
       handInterim = this.state.redCards; 
-    } else if(card === "black"){
+    } else if(colour === "black"){
       handInterim = this.state.blackCards; 
-    } else if(card === "white"){ 
+    } else if(colour === "white"){ 
       handInterim = this.state.whiteCards;
     }
 
@@ -205,7 +201,7 @@ export default class Arena extends Component {
           let new_cost = handInterim[i].props.cost;
 
           let base_card = this.state.base[0];
-          console.log(base_card);
+
           new_attack += base_card.props.attack;
           new_health += base_card.props.health;
           new_xp += base_card.props.xp;
@@ -230,24 +226,24 @@ export default class Arena extends Component {
 
     newBase.push(new_card);
     handInterim.splice(current, 1);
-    handInterim.push(this.generateCard(card));
+    handInterim.push(this.generateCard(colour));
 
-    if(card === "blue"){
+    if(colour === "blue"){
       this.setState({
         base : newBase,
         blueCards : handInterim
       });
-    } else if(card === "red"){
+    } else if(colour === "red"){
       this.setState({
         base : newBase,
         redCards : handInterim
       });
-    } else if(card === "black"){
+    } else if(colour === "black"){
       this.setState({
         base : newBase,
         blackCards : handInterim
       });
-    } else if(card === "white"){
+    } else if(colour === "white"){
       this.setState({
         base : newBase,
         whiteCards : handInterim
