@@ -95,7 +95,7 @@ export default class Arena extends Component {
     if (this.state.timeRemaining > 0){
       this.setState({ timeRemaining: this.state.timeRemaining - 1 });
     } else {
-      clearInterval(this.state.interval);
+      this.startGame();
     }
   }
 
@@ -205,7 +205,7 @@ export default class Arena extends Component {
             key = {generateRandomID()}
             unique = {generateRandomID()}
             check={() => this.checkScore()}
-            name = "Current Potion"
+            name = "Your Potion"
             health = {new_health}
             attack = {new_attack}
             xp = {new_xp}
@@ -279,7 +279,7 @@ export default class Arena extends Component {
     let card = <Card 
           key = {id}
           unique = {id}
-          name = "Current Potion"
+          name = "Your Potion"
           attack = {ap}
           health = {hp}
           cost = {cost}
@@ -307,9 +307,7 @@ export default class Arena extends Component {
         <div className="subtitle">a quick-paced potion-brewing card game</div>
         <div className="bar-black center">
           <div className="time">
-            Time remaining
-            <br/><br/>
-            {this.state.timeRemaining} seconds
+            Time remaining: {this.state.timeRemaining} seconds
             <br /><br />
             Current score: {this.state.score}
           </div>
@@ -320,27 +318,27 @@ export default class Arena extends Component {
             {this.state.target}
           </div>
 
-          <div className="black-play">
+          <div className="black-play animated slideInRight">
             {this.state.base}
           </div>
         </div>
 
         <div className="hand-container center">
-          <div className="ingredient-text">Click to add ingredients to your current potion</div>
+          <div className="ingredient-text">Click on a card to add ingredients to your potion</div>
 
-          <div className="white-hand">
+          <div className="white-hand animated flipInX">
             {this.state.whiteCards}
           </div>
 
-          <div className="blue-hand">
+          <div className="blue-hand animated flipInX">
             {this.state.blueCards}
           </div>
 
-          <div className="red-hand">
+          <div className="red-hand animated flipInX">
             {this.state.redCards}
           </div>
 
-          <div className="black-hand">
+          <div className="black-hand animated flipInX">
             {this.state.blackCards}
           </div>
 

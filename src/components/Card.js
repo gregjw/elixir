@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/Card.css';
+import '../css/Animation.css';
 
 export default class Card extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class Card extends Component {
       <div
         onClick = {clickFunction}
         onContextMenu = {this.props.discard}
-        className = {"card " + this.state.player + "-card noselect"}>
+        className = {"card " + this.state.player + "-card noselect animated flipInX"}>
         <div className="unique">{this.state.name}</div>
         <div className="center">
           <div className="stat attack">{this.state.attack}</div>

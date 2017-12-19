@@ -18,6 +18,8 @@ body {
 	font-size: 15px;
 	color: #fff;
 	font-weight: bolder;
+	text-align: left;
+	padding-left: 25px;
 }
 
 .score {
@@ -42,9 +44,10 @@ body {
 .ingredient-text{
 	color: #FFF;
 	font-size: 16px;
-	margin: 15px;
+	margin-top: 25px;
+	margin-bottom: 45px;
 	font-family: 'Inter UI', sans-serif;
-	text-align: left;
+	text-align: center;
 }
 
 .stat {
@@ -78,7 +81,7 @@ body {
 	margin-bottom: 25px;
 	background-color: #333;
 	padding: 20px;
-	width: 30%;
+	width: 250px;
 	border-radius: 5px;
 }
 
@@ -99,6 +102,7 @@ body {
 	display: inline-block;
 	position: relative;
 	margin-bottom: 25px;
+	padding-bottom: 50px;
 	border-radius: 5px;
 }
 
@@ -165,7 +169,7 @@ body {
 	margin: 10px;
 	padding: 5px;
 	padding-top: 15px;
-	width: 160px;
+	width: 250px;
 	float: right;
 	border-radius: 5px;
 	min-height: 85%;
