@@ -7,6 +7,32 @@ body {
 	border-radius: 5px;
 }
 
+.logo{
+	width: 50px;
+	position: relative;
+	animation: logo-spin infinite 10s linear;
+	padding: 5px 50px;
+	padding-bottom: 15px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.subtitle{
+	color: #FFF;
+	font-family: 'Inter UI', sans-serif;
+	margin-bottom: 35px;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.items .item {
+  flex: 1 0 25%;
+  box-sizing: border-box;
+}
+
 .noselect {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -24,26 +50,7 @@ body {
 	padding-left: 25px;
 }
 
-.score {
-	font-size: 16px;
-	font-weight: 'bold';
-	font-family: 'Inter UI', sans-serif;
-	color: #222;
-	background-color: #fff;
-	margin: 5px;
-	margin-top: 25px;
-	padding: 10px;
-	text-align: center;
-	position: relative;
-	display: block;
-	width: 250px;
-	margin-bottom: 25px;
-	padding: 20px;
-	width: 125px;
-	border-radius: 5px;
-}
-
-.ingredient-text{
+.instruction-header{
 	color: #FFF;
 	font-size: 16px;
 	margin-top: 25px;
@@ -66,12 +73,6 @@ body {
 	border-radius: 3px;
 	height: 25px;
 	min-width: 40px;
-}
-
-.subtitle{
-	color: #FFF;
-	font-family: 'Inter UI', sans-serif;
-	margin-bottom: 35px;
 }
 
 .bar{
@@ -149,26 +150,6 @@ body {
 	position: relative;
 	border-radius: 5px;
 	min-height: 85%;
-}
-
-.logo{
-	width: 50px;
-	position: relative;
-	animation: logo-spin infinite 10s linear;
-	padding: 5px 50px;
-	padding-bottom: 15px;
-	margin-top: 20px;
-	margin-bottom: 30px;
-}
-
-.items {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.items .item {
-  flex: 1 0 25%;
-  box-sizing: border-box;
 }
 
 .black-play{

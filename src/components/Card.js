@@ -23,8 +23,8 @@ export default class Card extends Component {
   render() {
     let clickFunction = this.props.moveToPlay;
 
-    if(this.props.check !== undefined){
-      clickFunction = this.props.check;
+    if(this.props.type === "base"){
+      clickFunction = this.props.restart;
     } else {
       clickFunction = this.props.moveToPlay;
     }
