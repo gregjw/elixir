@@ -8,10 +8,10 @@ export default class Card extends Component {
     this.state = {
       name  : this.props.name,
       character : "mage",
-      stat1 : this.props.stat1,
-      stat2 : this.props.stat2,
-      stat3 : this.props.stat3,
-      stat4 : this.props.stat4
+      attack : this.props.attack,
+      health : this.props.health,
+      stamina : this.props.stamina,
+      cost : this.props.cost
     }
   }
 
@@ -19,8 +19,8 @@ export default class Card extends Component {
     return (
       <div className="dialog">
         <div className="descriptor">A {this.state.character} walks in and croaks </div>
-        I need a potion with at least <span className="dialog-stat text-attack">{this.state.stat1}</span> as well as 
-        <span className="dialog-stat text-health"> {this.state.stat4}</span> but please, dont exceed <span className="dialog-stat text-agility">{this.state.stat4}</span>.
+        I need a potion with at least <span className="dialog-stat text-attack">{this.state.attack}</span> as well as 
+        <span className="dialog-stat text-health"> {this.state.cost}</span> but please, dont exceed <span className="dialog-stat text-agility">{this.state.cost}</span>.
         <br/><br/>
         Times are tough for a {this.state.character} like me.
       </div>

@@ -63,7 +63,7 @@ export default class Arena extends Component {
 
     this.d20 = this.d20.bind(this);
     this.tick = this.tick.bind(this);
-    this.startTimer = this.startTimer.bind(this);
+    this.startGame = this.startGame.bind(this);
 
     this.generateCard = this.generateCard.bind(this);
     this.discard = this.discard.bind(this);
@@ -74,19 +74,19 @@ export default class Arena extends Component {
   }
 
   componentDidMount(){
+    this.startGame();
+  }
+
+  startGame(){
     this.setState({
       blackCards : this.generateHand("black"),
       whiteCards : this.generateHand("white"),
       blueCards : this.generateHand("blue"),
       redCards : this.generateHand("red"),
-      target : this.generateTarget("white"),
-      base : this.generateBase("black")
+      target : this.generateTarget(),
+      base : this.generateBase()
     });
 
-    this.startTimer();
-  }
-
-  startTimer(){
     clearInterval(this.state.interval);
     this.setState({ timeRemaining : 30, interval: setInterval(this.tick, 1000) });
   }
@@ -108,19 +108,15 @@ export default class Arena extends Component {
     let target = this.state.target; 
     let score = this.state.score;
 
-    if(base[0].props.attack > target[0].props.stat1){
-      if(base[0].props.cost < target[0].props.stat4){
-        let base = this.generateBase("black");
-        let target = this.generateTarget("white");
-
-        this.setState({ score : score + 10, base : base, target: target});
-        this.startTimer();
-      } else {
-        let base = this.generateBase("black");
-        let target = this.generateTarget("white");
-
-        this.setState({ score : score - 10, base : base, target: target});
-        this.startTimer();
+    if(this.state.timeRemaining > 0){
+      if(base[0].props.attack > target[0].props.attack){
+        if(base[0].props.cost < target[0].props.cost){
+          this.setState({ score : score + 10 });
+          this.startGame();
+        } else {
+          this.setState({ score : score - 10 });
+          this.startGame();
+        }
       }
     }
   }
@@ -247,9 +243,11 @@ export default class Arena extends Component {
         whiteCards : handInterim
       });
     }
+
+    this.checkScore();
   }
 
-  generateTarget(colour){
+  generateTarget(){
     let id = generateRandomID();
     let ap = Math.round(Math.random() * (350 - 100) + 100);
     let hp = Math.round(Math.random() * (350 - 100) + 100);
@@ -260,18 +258,18 @@ export default class Arena extends Component {
           key = {id}
           unique = {id}
           name = {generateName()}
-          stat1 = {hp}
+          attack = {hp}
           stat2 = {ap}
           stat3 = {xp}
-          stat4 = {cost}
-          player = {colour} />;
+          cost = {cost}
+          player = "white" />;
 
     let hand = [];
     hand.push(card);
     return hand;
   } 
 
-  generateBase(colour){
+  generateBase(){
     let id = generateRandomID();
     let ap = 10;
     let hp = 10;
@@ -289,7 +287,7 @@ export default class Arena extends Component {
           check={() => this.checkScore()}
           moveToPlay={() => this.moveToPlay("base", id)}
           type = "base"
-          player = {colour} />;
+          player = "black"/>;
 
     let hand = [];
     hand.push(card);
@@ -305,7 +303,7 @@ export default class Arena extends Component {
   render() {
     return (
       <div className="container center">
-        <img onClick={() => this.startTimer()} alt="Elixir" className="logo" src={logo}/>
+        <img onClick={() => this.startGame()} alt="Elixir" className="logo" src={logo}/>
         <div className="subtitle">a quick-paced potion-brewing card game</div>
         <div className="bar-black center">
           <div className="time">
