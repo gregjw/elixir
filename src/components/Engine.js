@@ -8,7 +8,7 @@ import logo from '../assets/d20.png';
 
 function ua_track(category, action){
   var ua = require('universal-analytics');
-  var visitor = ua('UA-81505538-1');
+  var visitor = ua('UA-81505538-3');
   visitor.event(category, action).send();
 }
 
