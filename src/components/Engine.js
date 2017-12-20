@@ -111,20 +111,19 @@ export default class Arena extends Component {
   }
 
   checkScore(){
-    console.log("Checked");
     let base = this.state.base;
     let target = this.state.target; 
     let score = this.state.score;
 
     if(this.state.timeRemaining > 0){
-      if(base[0].props.mana > target[0].props.mana){
-        if(base[0].props.cost < target[0].props.cost){
+      if(base[0].props.cost <= target[0].props.cost){
+        if(base[0].props.mana >= target[0].props.mana){
           this.setState({ score : score + 10 });
           this.startGame();
-        } else {
-          this.setState({ score : score - 10 });
-          this.startGame();
         }
+      } else {
+        this.setState({ score : score - 10 });
+        this.startGame();
       }
     }
   }
