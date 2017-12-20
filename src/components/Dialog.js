@@ -26,8 +26,7 @@ export default class Dialog extends Component {
       <div onClick={this.props.restart} className="dialog animated slideInLeft">
         <div className="descriptor">A {this.state.character} walks in and croaks </div>
 
-        I need a potion with at least <span className="dialog-stat text-mana">{this.state.mana} mana</span> as well as 
-        <span className="dialog-stat text-stamina"> {this.state.stamina} stamina</span> but please, dont exceed <span className="dialog-stat text-agility">{this.state.cost} coins</span>.
+        I need a potion with at least <span className="dialog-stat text-mana">{this.state.mana} mana</span> but please, dont exceed <span className="dialog-stat text-agility">{this.state.cost} coins</span>.
         
         <br/><br/>
 

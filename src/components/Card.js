@@ -21,17 +21,9 @@ export default class Card extends Component {
   }
 
   render() {
-    let clickFunction = this.props.moveToPlay;
-
-    if(this.props.type === "base"){
-      clickFunction = this.props.restart;
-    } else {
-      clickFunction = this.props.moveToPlay;
-    }
-
     return (
       <div
-        onClick = {clickFunction}
+        onClick = {this.props.moveToPlay}
         onContextMenu = {this.props.discard}
         className = {"card " + this.state.player + "-card noselect animated flipInX"}>
         <div className="card-name">{this.state.name}</div>

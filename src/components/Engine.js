@@ -50,7 +50,7 @@ export default class Arena extends Component {
     this.state = {
       score : 0,
       interval : null,
-      timeRemaining : 30,
+      timeRemaining : 60,
       target : [],
       base : [],
       blackCards : [],
@@ -95,7 +95,7 @@ export default class Arena extends Component {
     });
 
     clearInterval(this.state.interval);
-    this.setState({ timeRemaining : 30, interval: setInterval(this.tick, 1000) });
+    this.setState({ timeRemaining : 60, interval: setInterval(this.tick, 1000) });
   }
 
   tick(){
@@ -111,12 +111,13 @@ export default class Arena extends Component {
   }
 
   checkScore(){
+    console.log("Checked");
     let base = this.state.base;
     let target = this.state.target; 
     let score = this.state.score;
 
     if(this.state.timeRemaining > 0){
-      if(base[0].props.mana > target[0].props.mana && base[0].props.stamina > target[0].props.stamina){
+      if(base[0].props.mana > target[0].props.mana){
         if(base[0].props.cost < target[0].props.cost){
           this.setState({ score : score + 10 });
           this.startGame();
