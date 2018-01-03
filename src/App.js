@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 
 import Engine from './components/Engine.js';
 

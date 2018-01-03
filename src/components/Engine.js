@@ -102,6 +102,8 @@ export default class Arena extends Component {
     if (this.state.timeRemaining > 0){
       this.setState({ timeRemaining: this.state.timeRemaining - 1 });
     } else {
+      let score = this.state.score;
+      this.setState({ score : score - 5 });
       this.startGame();
     }
   }
